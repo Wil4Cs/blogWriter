@@ -1,8 +1,8 @@
 <p>Here is a list of all posts:</p>
 
-<?php foreach($posts as $post) { ?>
+<?php foreach($chapters as $chapter) { ?>
   <p>
-    <?php echo $post->author; ?>
-    <a href='?controller=posts&action=show&id=<?php echo $post->id; ?>'>See content</a>
+    <?php echo $chapter->getAuthor(); ?>
+    <a href='?controller=posts&action=show&id=<?php echo $chapter->getId(); ?>'>See content</a>
   </p>
 <?php } ?>
