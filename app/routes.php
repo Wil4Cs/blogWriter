@@ -1,16 +1,16 @@
 <?php
 
 function call($controller, $action) {
-    require_once('../lib/vendors/Controllers/' . $controller . '_controller.php');
+    require_once('../lib/vendors/Controller/' . $controller . '_controller.php');
 
     switch($controller) {
         case 'chapters':
-            $controller = new \Controllers\ChaptersController();
+            $controller = new \Controller\ChaptersController();
             break;
         case 'posts':
             // we need the model to query the database later in the controller
             require_once('../lib/vendors/Entity/Chapter.php');
-            $controller = new \Controllers\PostsController();
+            $controller = new \Controller\PostsController();
             break;
     }
 
@@ -30,11 +30,3 @@ if (array_key_exists($controller, $controllers)) {
 } else {
     call('Chapters', 'error');
 }
-
-
-
-
-
-
-
-

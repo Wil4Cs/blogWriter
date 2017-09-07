@@ -1,8 +1,8 @@
 <?php
 
-namespace Controllers;
+namespace Controller;
 
-use Entity\Chapter;
+use Model\ChapterDAO;
 
 /**
  * Class PostsController
@@ -13,7 +13,7 @@ class PostsController
     public function index()
     {
         // we store all the chapters in a variable
-        $chapters = Chapter::all();
+        $chapters = ChapterDAO::findAllChapters();
         require_once('../views/posts/index.php');
     }
 
@@ -24,7 +24,7 @@ class PostsController
         if (!isset($_GET['id']))
             return call('Chapters', 'error');
         // we use the given id to get the right post
-        $chapter = \Entity\Chapter::find($_GET['id']);
+        $chapter = ChapterDAO::find($_GET['id']);
         require_once('../views/posts/show.php');
     }
 }

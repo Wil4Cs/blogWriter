@@ -2,7 +2,7 @@
 
 namespace Entity;
 
-use Framework\PDOFactory;
+
 /**
  * Class Chapter
  *
@@ -65,34 +65,5 @@ class Chapter
         $this->title   = $title;
         $this->content = $content;
         $this->date    = $date;
-    }
-
-    public static function all()
-    {
-        $list = [];
-        $db = PDOFactory::getDb();
-        $req = $db->query('SELECT * FROM Chapters');
-
-        // we create a list of Post objects from the database results
-        foreach($req->fetchAll() as $chapter)
-        {
-            $list[] = new Chapter($chapter['id'], $chapter['author'], $chapter['title'], $chapter['content'], $chapter['postDate']);
-        }
-
-        return $list;
-    }
-
-    public static function find($id)
-    {
-        $db = PDOFactory::getDb();
-        // we make sure $id is an integer
-        $id = intval($id);
-        $req = $db->prepare('SELECT * FROM Chapters WHERE id = :id');
-
-        // the query was prepared, now we replace :id with our actual $id value
-        $req->execute(array('id' => $id));
-        $chapter = $req->fetch();
-
-        return new Chapter($chapter['id'], $chapter['author'], $chapter['title'], $chapter['content'], $chapter['postDate']);
     }
 }
