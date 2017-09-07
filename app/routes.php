@@ -1,16 +1,16 @@
 <?php
 
 function call($controller, $action) {
-    require_once('../src/controllers/' . $controller . '_controller.php');
+    require_once('../lib/vendors/Controllers/' . $controller . '_controller.php');
 
     switch($controller) {
-        case 'pages':
-            $controller = new PagesController();
+        case 'chapters':
+            $controller = new \Controllers\ChaptersController();
             break;
         case 'posts':
             // we need the model to query the database later in the controller
-            require_once('../src/models/Chapter.php');
-            $controller = new PostsController();
+            require_once('../lib/vendors/Entity/Chapter.php');
+            $controller = new \Controllers\PostsController();
             break;
     }
 
@@ -18,17 +18,17 @@ function call($controller, $action) {
 }
 
 // we're adding an entry for the new controller and its actions
-$controllers = array('pages' => ['home', 'error'],
+$controllers = array('chapters' => ['home', 'error'],
                        'posts' => ['index', 'show']);
 
 if (array_key_exists($controller, $controllers)) {
     if (in_array($action, $controllers[$controller])) {
         call($controller, $action);
     } else {
-        call('pages', 'error');
+        call('Chapters', 'error');
     }
 } else {
-    call('pages', 'error');
+    call('Chapters', 'error');
 }
 
 

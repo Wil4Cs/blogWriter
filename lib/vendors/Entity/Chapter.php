@@ -1,7 +1,12 @@
 <?php
 
+namespace Entity;
+
+use Framework\PDOFactory;
 /**
  * Class Chapter
+ *
+ * @package Entity
  */
 
 class Chapter
@@ -66,7 +71,7 @@ class Chapter
     {
         $list = [];
         $db = PDOFactory::getDb();
-        $req = $db->query('SELECT * FROM chapters');
+        $req = $db->query('SELECT * FROM Chapters');
 
         // we create a list of Post objects from the database results
         foreach($req->fetchAll() as $chapter)
@@ -82,7 +87,7 @@ class Chapter
         $db = PDOFactory::getDb();
         // we make sure $id is an integer
         $id = intval($id);
-        $req = $db->prepare('SELECT * FROM chapters WHERE id = :id');
+        $req = $db->prepare('SELECT * FROM Chapters WHERE id = :id');
 
         // the query was prepared, now we replace :id with our actual $id value
         $req->execute(array('id' => $id));

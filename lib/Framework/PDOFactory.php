@@ -1,8 +1,6 @@
 <?php
 
-/**
- * Class PDOFactory
- */
+namespace Framework;
 
 class PDOFactory
 {
@@ -18,9 +16,9 @@ class PDOFactory
         if (!isset(self::$db))
         {
             try {
-                self::$db = new PDO(SELF::DSN, SELF::USERNAME, SELF::PASSWORD);
-                self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            } catch (PDOException $e) {
+                self::$db = new \PDO(SELF::DSN, SELF::USERNAME, SELF::PASSWORD);
+                self::$db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            } catch (\PDOException $e) {
                 echo 'Connexion failed : ' . $e->getMessage();
             }
         }
