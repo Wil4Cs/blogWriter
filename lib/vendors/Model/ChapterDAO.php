@@ -10,27 +10,16 @@ class ChapterDAO
 {
     public static function findAllChapters()
     {
-        $sql = 'SELECT * FROM Chapters';
-        $listChapters = PDOFactory::getDb()->query($sql);
-        $list = array();
-        foreach ($listChapters->fetchAll() as $chapter)
-        {
-            $list[] = new Chapter($chapter['id'], $chapter['author'], $chapter['title'], $chapter['content'], $chapter['postDate']);
-        }
-
-        return $list;
-
-        /*$list = [];
         $db = PDOFactory::getDb();
-        $req = $db->query('SELECT * FROM Chapters');
-
-        // we create a list of Post objects from the database results
-        foreach($req->fetchAll() as $chapter)
+        $result = $db->query('SELECT * FROM Chapters ORDER BY id DESC');
+        $chaptersList = array();
+        foreach ($result->fetchAll() as $chapter)
         {
-            $list[] = new Chapter($chapter['id'], $chapter['author'], $chapter['title'], $chapter['content'], $chapter['postDate']);
+            $chaptersList[] = new Chapter($chapter['id'], $chapter['author'], $chapter['title'], $chapter['content'], $chapter['postDate']);
         }
+        $result->closeCursor();
 
-        return $list;*/
+        return $chaptersList;
     }
 
     public static function find($id)
@@ -38,12 +27,22 @@ class ChapterDAO
         $db = PDOFactory::getDb();
         // we make sure $id is an integer
         $id = intval($id);
-        $req = $db->prepare('SELECT * FROM Chapters WHERE id = :id');
+        $result = $db->prepare('SELECT * FROM Chapters WHERE id = :id');
+        $result->bindValue(':id', $id);
+        $result->execute();
 
-        // the query was prepared, now we replace :id with our actual $id value
-        $req->execute(array('id' => $id));
-        $chapter = $req->fetch();
+        $chapter = $result->fetch();
+        $result->closeCursor();
 
-        return new Chapter($chapter['id'], $chapter['author'], $chapter['title'], $chapter['content'], $chapter['postDate']);
+        return $chapter = new Chapter($chapter['id'], $chapter['author'], $chapter['title'], $chapter['content'], $chapter['postDate']);
+    }
+
+    public static function count()
+    {
+        $db = PDOFactory::getDb();
+        $result = $db->query('SELECT COUNT(*) FROM Chapters');
+        $count = $result->fetchColumn();
+        $result->closeCursor();
+        return $count;
     }
 }

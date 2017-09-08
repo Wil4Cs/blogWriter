@@ -17,6 +17,24 @@ class Chapter
     private $content;
     private $date;
 
+    /**
+     * Chapter constructor.
+     *
+     * @param $id
+     * @param $author
+     * @param $title
+     * @param $content
+     * @param $date
+     */
+    public function __construct($id, $author, $title, $content, $date)
+    {
+        $this->id       = $id;
+        $this->author   = $author;
+        $this->title    = $title;
+        $this->content  = $content;
+        $this->date     = $date;
+    }
+
     // GETTERS //
     /**
      * @return mixed
@@ -58,12 +76,12 @@ class Chapter
         return $this->title;
     }
 
-    public function __construct($id, $author, $title, $content, $date)
+    // SETTERS //
+    /**
+     * @param mixed $content
+     */
+    public function setContent($content)
     {
-        $this->id      = $id;
-        $this->author  = $author;
-        $this->title   = $title;
         $this->content = $content;
-        $this->date    = $date;
     }
 }
