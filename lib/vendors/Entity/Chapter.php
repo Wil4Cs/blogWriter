@@ -11,28 +11,31 @@ namespace Entity;
 
 class Chapter
 {
-    private $id;
-    private $author;
-    private $title;
-    private $content;
-    private $date;
+    private $_id;
+    private $_chapter;
+    private $_author;
+    private $_title;
+    private $_content;
+    private $_date;
 
     /**
      * Chapter constructor.
      *
      * @param $id
+     * @param $chapter
      * @param $author
      * @param $title
      * @param $content
      * @param $date
      */
-    public function __construct($id, $author, $title, $content, $date)
+    public function __construct($id, $chapter, $author, $title, $content, $date)
     {
-        $this->id       = $id;
-        $this->author   = $author;
-        $this->title    = $title;
-        $this->content  = $content;
-        $this->date     = $date;
+        $this->_id       = $id;
+        $this->_chapter  = $chapter;
+        $this->_author   = $author;
+        $this->_title    = $title;
+        $this->_content  = $content;
+        $this->_date     = $date;
     }
 
     // GETTERS //
@@ -41,7 +44,15 @@ class Chapter
      */
     public function getAuthor()
     {
-        return $this->author;
+        return $this->_author;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChapter()
+    {
+        return $this->_chapter;
     }
 
     /**
@@ -49,7 +60,7 @@ class Chapter
      */
     public function getContent()
     {
-        return $this->content;
+        return $this->_content;
     }
 
     /**
@@ -57,7 +68,7 @@ class Chapter
      */
     public function getDate()
     {
-        return $this->date;
+        return $this->_date;
     }
 
     /**
@@ -65,7 +76,7 @@ class Chapter
      */
     public function getId()
     {
-        return $this->id;
+        return $this->_id;
     }
 
     /**
@@ -73,15 +84,15 @@ class Chapter
      */
     public function getTitle()
     {
-        return $this->title;
+        return $this->_title;
     }
 
     // SETTERS //
     /**
-     * @param mixed $content
+     * @param mixed $_content
      */
-    public function setContent($content)
+    public function setContent($_content)
     {
-        $this->content = $content;
+        $this->_content = $_content;
     }
 }

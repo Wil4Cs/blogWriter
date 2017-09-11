@@ -15,26 +15,26 @@ class ChapterDAO
         $chaptersList = array();
         foreach ($result->fetchAll() as $chapter)
         {
-            $chaptersList[] = new Chapter($chapter['id'], $chapter['author'], $chapter['title'], $chapter['content'], $chapter['postDate']);
+            $chaptersList[] = new Chapter($chapter['id'], $chapter['chapter'], $chapter['author'], $chapter['title'], $chapter['content'], $chapter['postDate']);
         }
         $result->closeCursor();
-
         return $chaptersList;
     }
 
     public static function find($id)
     {
         $db = PDOFactory::getDb();
-        // we make sure $id is an integer
-        $id = intval($id);
         $result = $db->prepare('SELECT * FROM Chapters WHERE id = :id');
         $result->bindValue(':id', $id);
         $result->execute();
-
         $chapter = $result->fetch();
-        $result->closeCursor();
-
-        return $chapter = new Chapter($chapter['id'], $chapter['author'], $chapter['title'], $chapter['content'], $chapter['postDate']);
+        // If the id is not matching, this means that the requested chapter does not exist
+        if ($chapter == false) {
+            return false;
+        } else {
+            $result->closeCursor();
+            return $chapter = new Chapter($chapter['id'], $chapter['chapter'], $chapter['author'], $chapter['title'], $chapter['content'], $chapter['postDate']);
+        }
     }
 
     public static function count()

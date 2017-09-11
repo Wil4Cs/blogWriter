@@ -1,7 +1,7 @@
 <?php
 
 function call($controller, $action) {
-    require_once('../lib/vendors/Controller/' . $controller . 'Controller.php');
+    require_once ('../lib/vendors/Controller/' . $controller . 'Controller.php');
 
     switch($controller) {
         case 'chapters':

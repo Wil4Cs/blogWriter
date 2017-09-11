@@ -11,15 +11,16 @@ use Model\ChapterDAO;
 
 class ChaptersController
 {
+    const maxLengthContent = '450';
+
     public function index()
     {
         $chapters= ChapterDAO::findAllChapters();
-        $maxContentLength = '450';
+        // Wrap content if it is higher than maxLengthContent
         foreach ($chapters as $chapter)
         {
-            if (strlen($chapter->getContent()) > $maxContentLength)
-            {
-                $wrapContent = substr($chapter->getContent(), 0, $maxContentLength);
+            if (strlen($chapter->getContent()) > SELF::maxLengthContent) {
+                $wrapContent = substr($chapter->getContent(), 0, SELF::maxLengthContent);
                 $wrapContent = substr($wrapContent, 0, strrpos($wrapContent, ' ')) . '...';
                 $chapter->setContent($wrapContent);
             }
@@ -32,7 +33,8 @@ class ChaptersController
             require_once('../views/Chapters/index.php');
         $content = ob_get_clean();
 
-        $numberOfChapters = ChapterDAO::count();
+        // Return chapters in increasing order for the menu "Chapitres" in the nav-bar
+        $chapters = array_reverse($chapters, true);
         require_once ('../views/Templates/layout.php');
     }
 
@@ -43,17 +45,20 @@ class ChaptersController
 
     public function show()
     {
-        // we expect a url of form ?controller=posts&action=show&id=x
-        // without an id we just redirect to the error page as we need the post id to find it in the database
         $id = $_GET['id'];
-        if (!isset($id))
-            return call('Chapters', 'error');
-        // we use the given id to get the right post
         $chapter = ChapterDAO::find($id);
-        ob_start();
-        require_once('../views/Chapters/show.php');
-        $content = ob_get_clean();
-        $numberOfChapters = ChapterDAO::count();
-        require_once ('../views/Templates/layout.php');
+        // check whether the identifier is set, is a number and it exists
+        if (isset($id) && is_numeric($id) && $chapter != false) {
+            ob_start();
+            require_once('../views/Chapters/show.php');
+            $content = ob_get_clean();
+
+            $chapters = ChapterDAO::findAllChapters();
+            // Return chapters in increasing order for the menu "Chapitres" in the nav-bar
+            $chapters = array_reverse($chapters, true);
+            require_once('../views/Templates/layout.php');
+        } else {
+            return $this->error();
+        }
     }
 }
