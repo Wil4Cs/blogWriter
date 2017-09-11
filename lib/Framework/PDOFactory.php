@@ -2,17 +2,16 @@
 
 namespace Framework;
 
+
+
 class PDOFactory
 {
-    CONST DSN = 'mysql:host=localhost;dbname=blogWriter';
-    CONST USERNAME = 'root';
-    CONST PASSWORD = 'root';
-
 
     public static function getDb()
     {
         try {
-            $db = new \PDO(SELF::DSN, SELF::USERNAME, SELF::PASSWORD);
+            $config = parse_ini_file('../app/config/dbSettings.ini');
+            $db = new \PDO('mysql:host='.$config['db_host']. ';dbname='.$config['db_name'], $config['db_user'], $config['db_password']);
             $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch (\PDOException $e) {
             echo 'Connexion failed : ' . $e->getMessage();

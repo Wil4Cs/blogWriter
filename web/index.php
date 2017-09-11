@@ -7,6 +7,7 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
     $controller = 'chapters';
     $action     = 'index';
 }
+
 // Include the class allowing us to record our autoload
 require __DIR__. '/../lib/Framework/SplClassLoader.php';
 
