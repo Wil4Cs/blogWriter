@@ -9,7 +9,7 @@ use Model\ChapterDAO;
  * Class PagesController
  */
 
-class ChaptersController
+class FrontController
 {
     const maxLengthContent = '450';
 

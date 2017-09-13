@@ -90,11 +90,6 @@ header p {
   color: #6C6C6C;
 }
 
-/* --- Section --- */
-.container section {
-    background-color: #FFFFFF;
-}
-
 /* --- Footer --- */
 footer {
   margin-top: 50px;
@@ -130,6 +125,7 @@ footer .backToTop {
 /* --- Chapters --- */
 .chapters {
     border-bottom: solid #D8D8D8 1px;
+    background-color: #FFFFFF;
 }
 .chapters h1 {
     color: #666666;
@@ -169,6 +165,7 @@ footer .backToTop {
 
 .chapterOnly {
     border-radius: 0px 0px 10px 10px;
+    background-color: #FFFFFF;
 }
 .chapterOnly img {
     padding-right: 0px;
@@ -177,25 +174,35 @@ footer .backToTop {
 .chapterOnly h1 {
     background-color: #9B9B9B;
     padding: 10px 0 10px 10px;
-    margin-top: 30px;
+    margin: 50px 0 0 15px;
     border-radius: 0 0 60px 0;
     color: #FFFFFF;
+    box-shadow: 4px 4px 8px black;
 }
 .chapterOnly h2 {
-    padding: 0 0 15px 80px;
     color: #808080;
+    margin-top: 40px;
 }
 .chapterOnly p {
     text-align: justify;
-    padding: 0 80px 0px 80px;
+    margin-top: 20px;
 }
 .chapterOnly .writer {
     text-align: right;
-    margin: 40px 80px 70px 80px;
+    margin-top: 40px;
     padding:10px 10px 10px 0;
     background-color: #EEEEEE;
     border-radius: 10px;
 }
+.comment {
+    color: #8C919B;
+}
+.comment a {
+    border-bottom: dashed #31E1F7 2px;
+}
+/*.chapterOnly h1, .chapterOnly h2, .chapterOnly p, .chapterOnly a{
+    border: solid black 1px;
+}*/
 
 /* ===== CONNECT ===== */
 
@@ -215,15 +222,6 @@ footer .backToTop {
   }
   .chapters p, .chapterOnly p {
     font-size: 13px;
-  }
-  .chapterOnly h2 {
-    padding: 0 0 15px 10px;
-  }
-  .chapterOnly p {
-      padding: 0 15px 0 15px;
-  }
-  .chapterOnly .writer {
-      margin: 40px 15px 70px 15px;
   }
   footer .btn-default {
     margin-left: 10px;

@@ -48,7 +48,7 @@
                   <li class="dropdown"><a data-toggle="dropdown" href="">Chapitres<b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu">
                         <?php foreach ($chapters as $chapter) { ?>
-                            <li><a href='?controller=chapters&action=show&id=<?php echo $chapter->getId() ?>'>Chapitre <?php echo $chapter->getChapter() ?></a></li>
+                            <li><a href='?controller=front&action=show&id=<?php echo $chapter->getId() ?>'>Chapitre <?php echo $chapter->getNumber() ?></a></li>
                         <?php } ?>
                     </ul>
                   </li>

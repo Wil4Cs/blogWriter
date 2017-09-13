@@ -12,7 +12,7 @@ namespace Entity;
 class Chapter
 {
     private $_id;
-    private $_chapter;
+    private $_number;
     private $_author;
     private $_title;
     private $_content;
@@ -22,16 +22,16 @@ class Chapter
      * Chapter constructor.
      *
      * @param $id
-     * @param $chapter
+     * @param $number
      * @param $author
      * @param $title
      * @param $content
      * @param $date
      */
-    public function __construct($id, $chapter, $author, $title, $content, $date)
+    public function __construct($id, $number, $author, $title, $content, $date)
     {
         $this->_id       = $id;
-        $this->_chapter  = $chapter;
+        $this->_number  = $number;
         $this->_author   = $author;
         $this->_title    = $title;
         $this->_content  = $content;
@@ -45,14 +45,6 @@ class Chapter
     public function getAuthor()
     {
         return $this->_author;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getChapter()
-    {
-        return $this->_chapter;
     }
 
     /**
@@ -77,6 +69,14 @@ class Chapter
     public function getId()
     {
         return $this->_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNumber()
+    {
+        return $this->_number;
     }
 
     /**

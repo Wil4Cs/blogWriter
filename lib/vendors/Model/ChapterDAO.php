@@ -15,7 +15,7 @@ class ChapterDAO
         $chaptersList = array();
         foreach ($result->fetchAll() as $chapter)
         {
-            $chaptersList[] = new Chapter($chapter['id'], $chapter['chapter'], $chapter['author'], $chapter['title'], $chapter['content'], $chapter['postDate']);
+            $chaptersList[] = new Chapter($chapter['id'], $chapter['number'], $chapter['author'], $chapter['title'], $chapter['content'], $chapter['postDate']);
         }
         $result->closeCursor();
         return $chaptersList;
@@ -33,7 +33,7 @@ class ChapterDAO
             return false;
         } else {
             $result->closeCursor();
-            return $chapter = new Chapter($chapter['id'], $chapter['chapter'], $chapter['author'], $chapter['title'], $chapter['content'], $chapter['postDate']);
+            return $chapter = new Chapter($chapter['id'], $chapter['number'], $chapter['author'], $chapter['title'], $chapter['content'], $chapter['postDate']);
         }
     }
 
