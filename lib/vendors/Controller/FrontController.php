@@ -5,6 +5,7 @@ namespace Controller;
 
 use Model\ChapterDAO;
 use Model\CommentDAO;
+use Entity\Comment;
 
 /**
  * Class PagesController
@@ -46,15 +47,23 @@ class FrontController
     {
         // Check whether the identifier is set, is an integer number and if the chapter id exists OR we return the error page
         if (isset($_GET['id']) && ctype_digit($_GET['id']) && ChapterDAO::ifExists(array('id', $_GET['id']))) {
-            //Select chapter's comments
+            // Find the chapter to show
             $chapter = ChapterDAO::find($_GET['id']);
-            $comments = CommentDAO::getListOf($_GET['id']);
+
+            // Check if a comment has just been mention
+            if (array_key_exists('commentId', $_POST)) {
+                CommentDAO::cautionComment($_POST['commentId']);
+            }
+
+            //Get all chapter's comments
+            $comments = CommentDAO::getListOfComments($_GET['id']);
             ob_start();
             require_once('../views/Chapters/show.php');
             $content = ob_get_clean();
 
+            //Get all chapter's for the menu "Chapitres" in the nav-bar
             $chapters = ChapterDAO::findAllChapters();
-            // Return chapters in increasing order for the menu "Chapitres" in the nav-bar
+            // Return chapters in increasing order
             $chapters = array_reverse($chapters, true);
             require_once('../views/Templates/layout.php');
         } else {
@@ -78,7 +87,12 @@ class FrontController
                 require_once('../views/Templates/layout.php');
             } else {
                 // Request method is POST so we need to insert a comment
-                CommentDAO::addComment($_POST['pseudo'], $_POST['contentComment'], $_GET['id']);
+                $comment = new Comment([
+                    'chapter' => $_GET['id'],
+                    'author' => $_POST['pseudo'],
+                    'content' => $_POST['commentContent']
+                    ]);
+                CommentDAO::addComment($comment);
                 return $this->show();
             }
         } else {

@@ -1,85 +1,85 @@
 /* ===== General Style ===== */
 
 body {
-  background: -webkit-linear-gradient(top right, #FFFFFF, #85F2F7, #31E1F7, #243BF7); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(top right, #FFFFFF, #85F2F7, #31E1F7, #243BF7); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(top right, #FFFFFF, #85F2F7, #31E1F7, #243BF7); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to top right, #FFFFFF, #85F2F7, #31E1F7, #243BF7); /* Standard syntax (must be last) */
-  padding-top: 10px;
-  font-family: 'Maven Pro', sans-serif;
-  font-size: 1.8em;
-  color: #8C919B;
+    background: -webkit-linear-gradient(top right, #FFFFFF, #85F2F7, #31E1F7, #243BF7); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(top right, #FFFFFF, #85F2F7, #31E1F7, #243BF7); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(top right, #FFFFFF, #85F2F7, #31E1F7, #243BF7); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to top right, #FFFFFF, #85F2F7, #31E1F7, #243BF7); /* Standard syntax (must be last) */
+    padding-top: 10px;
+    font-family: 'Maven Pro', sans-serif;
+    font-size: 1.8em;
+    color: #8C919B;
 }
 
 /* ===== LAYOUT ===== */
 
 /* --- Carousel --- */
 header #monCarousel {
-  margin: 0 0 60px 0;
+    margin: 0 0 60px 0;
 }
 header #monCarousel img {
-  width: 100%;
+    width: 100%;
 }
 
 /* --- Header Title --- */
 header h1 {
-  font-family: 'Kaushan Script', cursive;
-  color: #FFFFFF;
-  font-size: 5em;
-  text-shadow: 6px 6px 3px black;
-  margin-bottom: 25px;
+    font-family: 'Kaushan Script', cursive;
+    color: #FFFFFF;
+    font-size: 5em;
+    text-shadow: 6px 6px 3px black;
+    margin-bottom: 25px;
 }
 header h2 {
-  font-family: 'Gloria Hallelujah', cursive;
-  color: #FFFFFF;
-  font-size: 2em;
-  text-shadow: 3px 3px 2px black;
+    font-family: 'Gloria Hallelujah', cursive;
+    color: #FFFFFF;
+    font-size: 2em;
+    text-shadow: 3px 3px 2px black;
 }
 header p {
-  font-family: 'Gloria Hallelujah', cursive;
-  color: #FFFFFF;
-  text-shadow: 1px 3px 3px black;
+    font-family: 'Gloria Hallelujah', cursive;
+    color: #FFFFFF;
+    text-shadow: 1px 3px 3px black;
 }
 
 /* --- Navbar --- */
 .navbar {
-  background-color: #F7F7F7;
-  margin-bottom: 0px;
-  border-radius: 4px 4px 0 0;
+    background-color: #F7F7F7;
+    margin-bottom: 0px;
+    border-radius: 4px 4px 0 0;
 }
 .navbar .navbar-nav {
-  display: inline-block;
-  float: none;
+    display: inline-block;
+    float: none;
 }
 .navbar-brand {
-  padding-left: 20px;
-  margin-top: -22px;
+    padding-left: 20px;
+    margin-top: -22px;
 }
 .navbar .navbar-collapse {
-  text-align: center;
+    text-align: center;
 }
 .icon-bar {
-  background-color: #808080;
+    background-color: #808080;
 }
 .navbar-toggle {
-  margin: 20px 20px 20px 0;
-  border: solid #808080 1px;
+    margin: 20px 20px 20px 0;
+    border: solid #808080 1px;
 }
 /* Navbar link */
 .nav li {
-  margin: 5px 5px 0px 5px;
-  width: 140px;
-  border-radius: 10px;
-  background-color: #F7F7F7;
+    margin: 5px 5px 0px 5px;
+    width: 140px;
+    border-radius: 10px;
+    background-color: #F7F7F7;
 }
 .nav li .accueil {
-  background-color: #FFFFFF;
+    background-color: #FFFFFF;
 }
 .nav li .accueil:hover {
-  background-color: #FFFFFF;
+    background-color: #FFFFFF;
 }
 .nav li a {
-  color: #8C919B;
+    color: #8C919B;
 }
 .nav li a:hover{
     background-color:#F0F0F0;
@@ -87,37 +87,37 @@ header p {
 }
 /* Navbar Dropdown Menu */
 .dropdown-menu > li > a:hover {
-  color: #6C6C6C;
+    color: #6C6C6C;
 }
 
 /* --- Footer --- */
 footer {
-  margin-top: 50px;
-  margin-bottom: 70px;
+    margin-top: 50px;
+    margin-bottom: 70px;
 }
 footer .btn-default {
-  width: 35px;
-  height: 35px;
-  color: #666666;
-  background-color: #FFFFFF;
-  border-radius: 20px;
-  border-width: 0px;
-  box-shadow: 1px 1px 2px #243BF7;
+    width: 35px;
+    height: 35px;
+    color: #FFFFFF;
+    background-color: #37B5F2;
+    border-radius: 20px;
+    border-width: 0px;
+    box-shadow: 1px 1px 2px #464646;
 }
 footer .btn-default:hover {
-  color: #FFFFFF;
-  background-color: #8BE0E4;
-  border: none;
+    color: #464646;
+    background-color: #FFFFFF;
+    border: none;
 }
 footer .socialIcons {
-  background: -webkit-linear-gradient(right, #C0F8FB, #2ADBF8,#80F1F7); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(right, #C0F8FB, #2ADBF8,#80F1F7); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(right, #C0F8FB, #2ADBF8,#80F1F7); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to right, #C0F8FB, #2ADBF8,#80F1F7); /* Standard syntax (must be last) */
-  padding: 10px 0;
+    background: -webkit-linear-gradient(right, #C0F8FB, #2ADBF8,#80F1F7); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, #C0F8FB, #2ADBF8,#80F1F7); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, #C0F8FB, #2ADBF8,#80F1F7); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, #C0F8FB, #FFFFFF,#80F1F7); /* Standard syntax (must be last) */
+    padding: 10px 0;
 }
 footer .backToTop {
-  padding: 10px 0;
+    padding: 10px 0;
 }
 
 /* ===== INDEX ===== */
@@ -208,20 +208,43 @@ footer .backToTop {
     border-top: dashed #8C919B 1px;
     margin-bottom: 30px;
 }
+.commentInfo {
+    border-bottom: solid #D8D8D8 2px;
+    padding-bottom: 20px;
+}
 .comment .author {
-    color: #444444;
-    margin-top: 0px;
+    color: #37B5F2;
+    font-weight: bold;
+    margin-top: -5px;
     margin-bottom: 0px;
 }
-.comment .date, .comment .flag {
+.comment .date {
     margin-bottom: 0px;
+}
+.comment .content {
+    font-size: 15px;
+    color: #464646;
 }
 .comment .flag {
     text-align: right;
+    margin-bottom: 0px;
 }
-.commentInfo {
-    border-bottom: solid #D8D8D8 1px;
-    padding-bottom: 20px;
+.comment .flag button {
+    margin-top: 15px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    background-color: #FFFFFF;
+    color: #37B5F2;
+    border: solid #37B5F2 1px;
+}
+.comment .flag button:hover {
+    background-color: #37B5F2;
+    color: #FFFFFF;
+    border: solid #FFFFFF 1px;
+}
+.comment .danger {
+    text-align: right;
+    margin: 15px 15px 0px 0px;
 }
 /* ===== INSERTCOMMENT ===== */
 
@@ -232,98 +255,98 @@ footer .backToTop {
 /* ===== Media Queries ===== */
 
 @media (max-width: 767px) {
-  .img-circle {
-    width: 200px;
-    height: 200px;
-  }
-  .chapters h1, .chapterOnly h1 {
-    font-size: 25px;
-  }
-  .chapters h2, .chapterOnly h2 {
-    font-size: 17px;
-  }
-  .chapters p, .chapterOnly p, .comment a {
-    font-size: 13px;
-  }
-  footer .btn-default {
-    margin-left: 10px;
-  }
-  footer .backToTop {
-    margin-right: 11px;
-  }
+    .img-circle {
+        width: 200px;
+        height: 200px;
+    }
+    .chapters h1, .chapterOnly h1 {
+        font-size: 25px;
+    }
+    .chapters h2, .chapterOnly h2 {
+        font-size: 17px;
+    }
+    .chapters p, .chapterOnly p, .comment a {
+        font-size: 13px;
+    }
+    footer .btn-default {
+        margin-left: 10px;
+    }
+    footer .backToTop {
+        margin-right: 11px;
+    }
 }
 @media (min-width: 768px){
-  .img-circle {
-    width: 230px;
-    height: 230px;
-  }
-  .chapters h1, .chapterOnly h1 {
-    font-size: 30px;
-  }
-  .chapters h2, .chapterOnly h2 {
-    font-size: 20px;
-  }
-  .chapters p, .chapterOnly p, .comment a {
-    font-size: 15px;
-  }
-  .container .chapters img {
-    margin: 108px 0 0 0;
-  }
-  #monCarousel img {
-    max-height: 450px;
-  }
-  footer .btn-default {
-    margin-left: 10px;
-  }
+    .img-circle {
+        width: 230px;
+        height: 230px;
+    }
+    .chapters h1, .chapterOnly h1 {
+        font-size: 30px;
+    }
+    .chapters h2, .chapterOnly h2 {
+        font-size: 20px;
+    }
+    .chapters p, .chapterOnly p, .comment a {
+        font-size: 15px;
+    }
+    .container .chapters img {
+        margin: 108px 0 0 0;
+    }
+    #monCarousel img {
+        max-height: 450px;
+    }
+    footer .btn-default {
+        margin-left: 10px;
+    }
 }
 @media (min-width: 992px){
-  .img-circle {
-    width: 250px;
-    height: 250px;
-  }
-  .chapters h1, .chapterOnly h1 {
-    font-size: 40px;
-  }
-  .chapters h2, .chapterOnly h2 {
-    font-size: 26px;
-  }
-  .chapters p, .chapterOnly p, .comment a {
-    font-size: 20px;
-  }
-  .container .chapters img {
-    margin: 130px 0 0 25px;
-  }
-  #monCarousel img {
-    max-height: 540px;
-  }
-  header p {
-    padding-top: 90px;
-  }
-  footer .btn-default {
-    margin-left: 20px;
-  }
+    .img-circle {
+        width: 250px;
+        height: 250px;
+    }
+    .chapters h1, .chapterOnly h1 {
+        font-size: 40px;
+    }
+    .chapters h2, .chapterOnly h2 {
+        font-size: 26px;
+    }
+    .chapters p, .chapterOnly p, .comment a {
+        font-size: 20px;
+    }
+    .container .chapters img {
+        margin: 130px 0 0 25px;
+    }
+    #monCarousel img {
+        max-height: 540px;
+    }
+    header p {
+        padding-top: 90px;
+    }
+    footer .btn-default {
+        margin-left: 20px;
+    }
 }
 @media (min-width: 1200px) {
-  .img-circle {
-    width: 300px;
-    height: 300px;
-  }
-  .chapters h1, .chapterOnly h1 {
-    font-size: 45px;
-  }
-  .chapters h2, .chapterOnly h2 {
-    font-size: 30px;
-  }
-  .chapters p, .chapterOnly p, .comment a {
-    font-size: 20px;
-  }
-  #monCarousel img {
-    max-height: 608px;
-  }
-  .container .chapters img {
-    margin: 96px 0 0 35px;
-  }
-  footer .btn-default {
-    margin-left: 30px;
-  }
+    .img-circle {
+        width: 300px;
+        height: 300px;
+    }
+    .chapters h1, .chapterOnly h1 {
+        font-size: 45px;
+    }
+    .chapters h2, .chapterOnly h2 {
+        font-size: 30px;
+    }
+    .chapters p, .chapterOnly p, .comment a {
+        font-size: 20px;
+    }
+    #monCarousel img {
+        max-height: 608px;
+    }
+    .container .chapters img {
+        margin: 96px 0 0 35px;
+    }
+    footer .btn-default {
+        margin-left: 30px;
+    }
 }

@@ -13,9 +13,10 @@ class ChapterDAO
         $db = PDOFactory::getDb();
         $result = $db->query('SELECT * FROM Chapters ORDER BY id DESC');
         $chaptersList = array();
-        foreach ($result->fetchAll() as $chapter)
+        $chapters = $result->fetchAll();
+        foreach ($chapters as $sqlRow)
         {
-            $chaptersList[] = new Chapter($chapter['id'], $chapter['number'], $chapter['author'], $chapter['title'], $chapter['content'], $chapter['postDate']);
+            $chaptersList[] = new Chapter($sqlRow);
         }
         $result->closeCursor();
         return $chaptersList;
@@ -27,10 +28,10 @@ class ChapterDAO
         $result = $db->prepare('SELECT * FROM Chapters WHERE id = :id');
         $result->bindValue(':id', $id);
         $result->execute();
-        $chapter = $result->fetch();
+        $sqlRow = $result->fetch();
         $result->closeCursor();
 
-        return $chapter = new Chapter($chapter['id'], $chapter['number'], $chapter['author'], $chapter['title'], $chapter['content'], $chapter['postDate']);
+        return $chapter = new Chapter($sqlRow);
     }
 
     public static function ifExists(array $column)

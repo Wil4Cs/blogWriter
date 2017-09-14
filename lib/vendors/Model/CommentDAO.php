@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: wilfriedcottineau
- * Date: 13/09/2017
- * Time: 10:54
- */
 
 namespace Model;
 
@@ -13,27 +7,37 @@ use Framework\PDOFactory;
 
 class CommentDAO
 {
-    public static function getListOf($chapter)
+    public static function getListOfComments($chapter)
     {
         $db = PDOFactory::getDb();
         $result = $db->query('SELECT * FROM comments WHERE chapter =' .$chapter. ' ORDER BY id DESC');
         $comments = $result->fetchAll();
         $commentList = array();
-        foreach ($comments as $comment)
+        foreach ($comments as $sqlRow)
         {
-            $commentList[] = new Comment($comment['id'], $comment['author'], $comment['content'], $comment['postDate'], $comment['chapter'], $comment['flag']);
+            $commentList[] = new Comment($sqlRow);
         }
         $result->closeCursor();
         return $commentList;
     }
 
-    public static function addComment($author, $content, $chapter)
+    public static function addComment(Comment $comment)
     {
         $db = PDOFactory::getDb();
         $result = $db->prepare('INSERT INTO comments SET author = :author, content = :content, chapter = :chapter, postDate = NOW()' );
-        $result->bindValue('author', $author);
-        $result->bindValue('content', $content);
-        $result->bindValue('chapter', $chapter);
+        $result->bindValue('author', $comment->getAuthor());
+        $result->bindValue('content', $comment->getContent());
+        $result->bindValue('chapter', $comment->getChapter());
+        $result->execute();
+        $result->closeCursor();
+    }
+
+    public static function cautionComment($id)
+    {
+        $db = PDOFactory::getDb();
+        $result = $db->prepare('UPDATE comments SET flag = :flag WHERE id = :id');
+        $result->bindValue('flag', '1');
+        $result->bindValue('id', $id);
         $result->execute();
         $result->closeCursor();
     }

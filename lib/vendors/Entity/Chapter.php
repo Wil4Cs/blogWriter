@@ -8,7 +8,6 @@ namespace Entity;
  *
  * @package Entity
  */
-
 class Chapter
 {
     private $_id;
@@ -21,21 +20,22 @@ class Chapter
     /**
      * Chapter constructor.
      *
-     * @param $id
-     * @param $number
-     * @param $author
-     * @param $title
-     * @param $content
-     * @param $date
+     * @param array $data
      */
-    public function __construct($id, $number, $author, $title, $content, $date)
+    public function __construct(array $data)
     {
-        $this->_id       = $id;
-        $this->_number  = $number;
-        $this->_author   = $author;
-        $this->_title    = $title;
-        $this->_content  = $content;
-        $this->_date     = $date;
+        if(!empty($data)) {
+
+            foreach ($data as $key => $value)
+            {
+                $method = 'set'.ucfirst($key);
+
+                if (is_callable([$this, $method]))
+                {
+                    $this->$method($value);
+                }
+            }
+        }
     }
 
     // GETTERS //
@@ -89,10 +89,71 @@ class Chapter
 
     // SETTERS //
     /**
-     * @param mixed $_content
+     * @param $author
+     * @return null
      */
-    public function setContent($_content)
+    public function setAuthor($author)
     {
-        $this->_content = $_content;
+        if (empty($author) || !is_string($author))
+        {
+            return null;
+        }
+        $this->_author = $author;
+    }
+
+    /**
+     * @param $content
+     * @return null
+     */
+    public function setContent($content)
+    {
+        if (empty($content) || !is_string($content))
+        {
+            return null;
+        }
+        $this->_content = $content;
+    }
+
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->_id = $id;
+    }
+
+    /**
+     * @param $number
+     * @return null
+     */
+    public function setNumber($number)
+    {
+        if (empty($number) || !ctype_digit($number))
+        {
+            return null;
+        }
+        $this->_number = $number;
+    }
+
+    /**
+     * @param $date
+     */
+    public function setPostDate($date)
+    {
+        $this->_date = $date;
+    }
+
+    /**
+     * @param $title
+     * @return null
+     */
+    public function setTitle($title)
+    {
+        if (empty($title) || !is_string($title))
+        {
+            return null;
+        }
+        $this->_title = $title;
     }
 }

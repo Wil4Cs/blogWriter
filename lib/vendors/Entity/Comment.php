@@ -8,7 +8,6 @@ namespace Entity;
  *
  * @package Entity
  */
-
 class Comment
 {
     private $_id;
@@ -21,26 +20,22 @@ class Comment
     /**
      * Comment constructor.
      *
-     * @param $_id
-     * @param $_author
-     * @param $_content
-     * @param $_date
-     * @param $_chapter
-     * @param $_flag
+     * @param array $data
      */
-    public function __construct($_id, $_author, $_content, $_date, $_chapter, $_flag)
+    public function __construct(array $data)
     {
-        $this->_id = $_id;
-        $this->_author = $_author;
-        $this->_content = $_content;
-        $this->_date = $_date;
-        $this->_chapter = $_chapter;
-        $this->_flag = $_flag;
-    }
+        if(!empty($data)) {
 
-    public function isValid()
-    {
-        return !(empty($this->_author) || empty($this->content));
+            foreach ($data as $key => $value)
+            {
+                $method = 'set'.ucfirst($key);
+
+                if (is_callable([$this, $method]))
+                {
+                    $this->$method($value);
+                }
+            }
+        }
     }
 
     // GETTERS //
@@ -128,14 +123,6 @@ class Comment
     }
 
     /**
-     * @param mixed $date
-     */
-    public function setDate($date)
-    {
-        $this->_date = $date;
-    }
-
-    /**
      * @param mixed $flag
      */
     public function setFlag($flag)
@@ -149,5 +136,13 @@ class Comment
     public function setId($id)
     {
         $this->_id = $id;
+    }
+
+    /**
+     * @param $date
+     */
+    public function setPostDate($date)
+    {
+        $this->_date = $date;
     }
 }

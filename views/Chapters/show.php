@@ -16,10 +16,17 @@
                     <?php if(!empty($comments)) {
                         foreach ($comments as $comment) { ?>
                             <div class="commentInfo col-xs-offset-2 col-xs-8">
-                                <p class="date col-xs-8"><?php echo $comment->getDate() ?></p>
-                                <p class="flag col-xs-4">Signaler</p>
-                                <p class="author col-xs-12"><?php echo htmlspecialchars($comment->getAuthor()) ?></p>
-                                <p class="col-xs-12"><?php echo nl2br(htmlspecialchars($comment->getContent())) ?></p>
+                                <h5 class="date col-xs-8"><?php echo $comment->getDate() ?></h5>
+                                <?php if ($comment->getFlag() == false) { ?>
+                                    <form  class="flag col-xs-4" action="" method="post">
+                                        <input type="hidden" name="commentId" value="<?php echo $comment->getId() ?>">
+                                        <button type="submit" class="btn">Signaler</button>
+                                    </form>
+                                <?php } else { ?>
+                                    <p class="danger"><i class="fa fa-lg fa-exclamation-triangle text-danger" aria-hidden="true"></i></p>
+                                <?php } ?>
+                                <h3 class="author col-xs-12"><?php echo strtoupper(htmlspecialchars($comment->getAuthor())) ?></h3>
+                                <p class="content col-xs-12"><?php echo nl2br(htmlspecialchars($comment->getContent())) ?></p>
                             </div>
                         <?php } ?>
                     <?php } ?>
@@ -28,3 +35,4 @@
         </div>
     </section>
 </div>
+
