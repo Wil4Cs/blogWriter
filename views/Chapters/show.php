@@ -11,14 +11,18 @@
         </div>
         <div class="row">
             <div class="comment col-xs-offset-1 col-xs-10">
-                <a class=" col-xs-12">Poster un commentaire</a>
-                <div class="row">
-                    <div class="col-xs-offset-2 col-xs-8">
-                        <p class="col-xs-8">Date</p>
-                        <p class="col-xs-4">Signaler</p>
-                        <p class="col-xs-12">Auteur</p>
-                        <p class="col-xs-12">PARAGRAPHE</p>
-                    </div>
+                <a class="btn btn-default" href="?controller=front&action=insertComment&id=<?php echo $chapter->getId() ?>">Poster un commentaire<?php if(empty($comments)) { ?> - Soyez le premier!<?php } ?></a>
+                <div class="dashed row">
+                    <?php if(!empty($comments)) {
+                        foreach ($comments as $comment) { ?>
+                            <div class="commentInfo col-xs-offset-2 col-xs-8">
+                                <p class="date col-xs-8"><?php echo $comment->getDate() ?></p>
+                                <p class="flag col-xs-4">Signaler</p>
+                                <p class="author col-xs-12"><?php echo htmlspecialchars($comment->getAuthor()) ?></p>
+                                <p class="col-xs-12"><?php echo nl2br(htmlspecialchars($comment->getContent())) ?></p>
+                            </div>
+                        <?php } ?>
+                    <?php } ?>
                 </div>
             </div>
         </div>

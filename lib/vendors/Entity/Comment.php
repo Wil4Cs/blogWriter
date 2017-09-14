@@ -18,9 +18,29 @@ class Comment
     private $_chapter;
     private $_flag;
 
+    /**
+     * Comment constructor.
+     *
+     * @param $_id
+     * @param $_author
+     * @param $_content
+     * @param $_date
+     * @param $_chapter
+     * @param $_flag
+     */
+    public function __construct($_id, $_author, $_content, $_date, $_chapter, $_flag)
+    {
+        $this->_id = $_id;
+        $this->_author = $_author;
+        $this->_content = $_content;
+        $this->_date = $_date;
+        $this->_chapter = $_chapter;
+        $this->_flag = $_flag;
+    }
+
     public function isValid()
     {
-        return !(empty($this->author) || empty($this->_author));
+        return !(empty($this->_author) || empty($this->content));
     }
 
     // GETTERS //
@@ -87,18 +107,23 @@ class Comment
     }
 
     /**
-     * @param mixed $news
+     * @param $chapter
      */
-    public function setChapter($news)
+    public function setChapter($chapter)
     {
-        $this->_chapter = $news;
+        $this->_chapter = (int)$chapter;
     }
 
     /**
-     * @param mixed $content
+     * @param $content
+     * @return null
      */
     public function setContent($content)
     {
+        if(empty($content)  || !is_string($content))
+        {
+            return null;
+        }
         $this->_content = $content;
     }
 

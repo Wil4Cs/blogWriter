@@ -35,7 +35,7 @@ INSERT INTO `chapters` (`id`, `number`, `author`, `title`, `content`, `postDate`
 -- Structure de la table `comments`
 --
 
-DROP TABLE IF EXISTS `chapters`;
+DROP TABLE IF EXISTS `comments`;
 CREATE TABLE IF NOT EXISTS `comments` (
   `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
   `author` varchar(30) NOT NULL,

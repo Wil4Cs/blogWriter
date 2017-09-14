@@ -28,13 +28,25 @@ class ChapterDAO
         $result->bindValue(':id', $id);
         $result->execute();
         $chapter = $result->fetch();
-        // If the id is not matching, this means that the requested chapter does not exist
-        if ($chapter == false) {
-            return false;
-        } else {
+        $result->closeCursor();
+
+        return $chapter = new Chapter($chapter['id'], $chapter['number'], $chapter['author'], $chapter['title'], $chapter['content'], $chapter['postDate']);
+    }
+
+    public static function ifExists(array $column)
+    {
+        $db = PDOFactory::getDb();
+        $result = $db->prepare('SELECT '.$column['0'].' FROM Chapters WHERE '.$column['0'].' = :col');
+        $result->bindValue(':col', $column['1']);
+        $result->execute();
+        // If it's matching, this means that the requested exists and return true or it returns false
+        if ($result->fetch() == false) {
             $result->closeCursor();
-            return $chapter = new Chapter($chapter['id'], $chapter['number'], $chapter['author'], $chapter['title'], $chapter['content'], $chapter['postDate']);
+            return false;
         }
+        $result->closeCursor();
+
+        return true;
     }
 
     public static function count()
@@ -43,6 +55,7 @@ class ChapterDAO
         $result = $db->query('SELECT COUNT(*) FROM Chapters');
         $count = $result->fetchColumn();
         $result->closeCursor();
+
         return $count;
     }
 }

@@ -8,7 +8,7 @@ body {
   padding-top: 10px;
   font-family: 'Maven Pro', sans-serif;
   font-size: 1.8em;
-  color: #9B9B9B;
+  color: #8C919B;
 }
 
 /* ===== LAYOUT ===== */
@@ -79,7 +79,7 @@ header p {
   background-color: #FFFFFF;
 }
 .nav li a {
-  color: #9B9B9B;
+  color: #8C919B;
 }
 .nav li a:hover{
     background-color:#F0F0F0;
@@ -150,12 +150,12 @@ footer .backToTop {
     margin-bottom: 80px;
     padding: 10px 40px;
     border-radius: 10px;
-    color: #9B9B9B;
+    color: #8C919B;
     font-size: 0.9em;
-    border-color: #9B9B9B;
+    border-color: #8C919B;
 }
 .chapters article .btn:hover {
-    color: #9B9B9B;
+    color: #8C919B;
     background-color: #F7F7F7;
 }
 
@@ -172,7 +172,7 @@ footer .backToTop {
     padding-left: 0px;
 }
 .chapterOnly h1 {
-    background-color: #9B9B9B;
+    background-color: #8C919B;
     padding: 10px 0 10px 10px;
     margin: 50px 0 0 15px;
     border-radius: 0 0 60px 0;
@@ -194,18 +194,40 @@ footer .backToTop {
     background-color: #EEEEEE;
     border-radius: 10px;
 }
-.comment {
+
+/* --- Comment --- */
+.comment .btn {
     color: #8C919B;
+    border: none;
 }
-.comment a {
-    border-bottom: dashed #31E1F7 2px;
+.comment .btn:hover{
+    color: #37B5EA;
+    background-color: #FFFFFF;
 }
-/*.chapterOnly h1, .chapterOnly h2, .chapterOnly p, .chapterOnly a{
-    border: solid black 1px;
-}*/
+.comment .dashed {
+    border-top: dashed #8C919B 1px;
+    margin-bottom: 30px;
+}
+.comment .author {
+    color: #444444;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.comment .date, .comment .flag {
+    margin-bottom: 0px;
+}
+.comment .flag {
+    text-align: right;
+}
+.commentInfo {
+    border-bottom: solid #D8D8D8 1px;
+    padding-bottom: 20px;
+}
+/* ===== INSERTCOMMENT ===== */
 
-/* ===== CONNECT ===== */
-
+.insertComment {
+    margin-top: 60px;
+}
 
 /* ===== Media Queries ===== */
 
@@ -220,7 +242,7 @@ footer .backToTop {
   .chapters h2, .chapterOnly h2 {
     font-size: 17px;
   }
-  .chapters p, .chapterOnly p {
+  .chapters p, .chapterOnly p, .comment a {
     font-size: 13px;
   }
   footer .btn-default {
@@ -241,7 +263,7 @@ footer .backToTop {
   .chapters h2, .chapterOnly h2 {
     font-size: 20px;
   }
-  .chapters p, .chapterOnly p {
+  .chapters p, .chapterOnly p, .comment a {
     font-size: 15px;
   }
   .container .chapters img {
@@ -265,7 +287,7 @@ footer .backToTop {
   .chapters h2, .chapterOnly h2 {
     font-size: 26px;
   }
-  .chapters p, .chapterOnly p {
+  .chapters p, .chapterOnly p, .comment a {
     font-size: 20px;
   }
   .container .chapters img {
@@ -292,7 +314,7 @@ footer .backToTop {
   .chapters h2, .chapterOnly h2 {
     font-size: 30px;
   }
-  .chapters p, .chapterOnly p {
+  .chapters p, .chapterOnly p, .comment a {
     font-size: 20px;
   }
   #monCarousel img {

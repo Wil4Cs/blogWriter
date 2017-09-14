@@ -18,7 +18,7 @@ function call($controller, $action) {
 
 // Add an entry for the new controller and its actions
 $controllers = array(
-    'front' => ['index', 'show', 'error'],
+    'front' => ['index', 'show', 'error', 'insertComment'],
     'back'  => ['index']
 );
 
