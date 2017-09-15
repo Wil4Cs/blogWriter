@@ -143,6 +143,6 @@ class Comment
      */
     public function setPostDate($date)
     {
-        $this->_date = $date;
+        $this->_date = new \DateTime($date);
     }
 }

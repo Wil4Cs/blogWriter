@@ -1,7 +1,7 @@
 <?php
 
 function call($controller, $action) {
-    require_once ('../lib/vendors/Controller/' . ucfirst($controller) . 'Controller.php');
+    //require_once ('../lib/vendors/Controller/' . ucfirst($controller) . 'Controller.php');
 
     switch($controller) {
         case 'front':

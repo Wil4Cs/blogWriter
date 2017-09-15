@@ -209,8 +209,10 @@ footer .backToTop {
     margin-bottom: 30px;
 }
 .commentInfo {
-    border-bottom: solid #D8D8D8 2px;
+    margin-top: 10px;
     padding-bottom: 20px;
+    background-color: #F7F7F7;
+    border-radius: 10px;
 }
 .comment .author {
     color: #37B5F2;
@@ -247,9 +249,13 @@ footer .backToTop {
     margin: 15px 15px 0px 0px;
 }
 /* ===== INSERTCOMMENT ===== */
-
+.legInsCom {
+    text-align: center;
+    color: #666666;
+}
 .insertComment {
-    margin-top: 60px;
+    margin-top: 0px;
+    border-radius: 0 0 10px 10px;
 }
 
 /* ===== Media Queries ===== */

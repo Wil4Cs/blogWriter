@@ -136,12 +136,13 @@ class Chapter
         $this->_number = $number;
     }
 
+
     /**
      * @param $date
      */
     public function setPostDate($date)
     {
-        $this->_date = $date;
+        $this->_date = new \DateTime($date);
     }
 
     /**

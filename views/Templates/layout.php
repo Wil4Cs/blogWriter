@@ -25,7 +25,7 @@
         <div class="text-center col-md-3 col-md-offset-1"><h2>Billet simple pour</h2></div>
         <div class="col-md-4 text-center"><h1>l'Alaska</h1></div>
         <div class="col-md-3 text-center"><p>par Jean Forteroche</p></div>
-        <?php if(isset($carousel)) echo $carousel ?>
+        <? if(isset($carousel)) echo $carousel ?>
       </header>
 
       <!-- Navigation
@@ -47,9 +47,9 @@
                 <li><a class="accueil" href="/">Accueil</a></li>
                   <li class="dropdown"><a data-toggle="dropdown" href="">Chapitres<b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu">
-                        <?php foreach ($chapters as $chapter) { ?>
-                            <li><a href='?controller=front&action=show&id=<?php echo $chapter->getId() ?>'>Chapitre <?php echo $chapter->getNumber() ?></a></li>
-                        <?php } ?>
+                        <? foreach ($chapters as $chapter) { ?>
+                            <li><a href='?controller=front&action=show&id=<? echo $chapter->getId() ?>'>Chapitre <? echo $chapter->getNumber() ?></a></li>
+                        <? } ?>
                     </ul>
                   </li>
                 <li><a href="#contact">Admin</a></li>
@@ -61,7 +61,7 @@
 
       <!-- Section
       ================================================== -->
-      <?php echo $content ?>
+      <? echo $content ?>
 
       <!-- Footer
       ================================================== -->

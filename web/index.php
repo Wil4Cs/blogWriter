@@ -15,14 +15,13 @@ require __DIR__. '/../lib/Framework/SplClassLoader.php';
 $frameworkLoader = new SplClassLoader('Framework', __DIR__. '/../lib');
 $frameworkLoader->register();
 
-//$controllerLoader = new SplClassLoader('Controller', __DIR__. '/../lib/vendors');
-//$controllerLoader->register();
+$controllerLoader = new SplClassLoader('Controller', __DIR__. '/../lib/vendors');
+$controllerLoader->register();
 
 $entityLoader = new SplClassLoader('Entity', __DIR__. '/../lib/vendors');
 $entityLoader->register();
 
-$entityLoader = new SplClassLoader('Model', __DIR__. '/../lib/vendors');
-$entityLoader->register();
+$modelLoader = new SplClassLoader('Model', __DIR__. '/../lib/vendors');
+$modelLoader->register();
 
-//require_once('../views/Templates/layout.php');
 require_once ('../app/routes.php');
