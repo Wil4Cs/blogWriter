@@ -7,7 +7,7 @@
             <div class="horizontal_bar"></div>
             <h2><? echo $chapter->getTitle() ?></h2>
             <p><? echo $chapter->getContent() ?></p>
-            <a class="btn btn-default" href="?controller=front&action=show&id=<? echo $chapter->getId() ?>">Read Chapter</a>
+            <a class="btn btn-default" href="?controller=front&amp;action=show&amp;id=<? echo $chapter->getId() ?>">Read Chapter</a>
         </article>
     </section>
 </div>

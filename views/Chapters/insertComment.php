@@ -6,15 +6,15 @@
                 <label for="pseudo">Pseudo : </label>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                    <input type="text" class="form-control" id="pseudo" name="pseudo" value="" maxlength="30" placeholder="Entrez votre pseudo de 30 caractères maximum." required>
+                    <input type="text" class="form-control" id="pseudo" name="pseudo" value="" maxlength="30" pattern=".{3,}" placeholder="Entrez votre pseudo (3 carac. min / 30 carac. max)" autofocus required>
                 </div>
             </div>
             <div class="form-group col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
                 <label for="commentContent">Contenu : </label>
                 <textarea class="form-control" id="commentContent" rows="6" name="commentContent" value="" placeholder="Votre commentaire ici..." required></textarea>
             </div>
-            <div class="form-group col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
-            <button type="submit" class="btn btn-primary">Ajouter</button>
+            <div class="form-group col-sm-12 col-md-offset-1 col-lg-offset-2">
+                <button type="submit" class="btn btn-primary">Ajouter</button>
             </div>
         </form>
     </section>

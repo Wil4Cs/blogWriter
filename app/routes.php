@@ -1,7 +1,6 @@
 <?php
 
 function call($controller, $action) {
-    //require_once ('../lib/vendors/Controller/' . ucfirst($controller) . 'Controller.php');
 
     switch($controller) {
         case 'front':
@@ -19,7 +18,7 @@ function call($controller, $action) {
 // Add an entry for the new controller and its actions
 $controllers = array(
     'front' => ['index', 'show', 'error', 'insertComment'],
-    'back'  => ['index']
+    'back'  => ['index', 'connexion']
 );
 
 if (array_key_exists($controller, $controllers)) {

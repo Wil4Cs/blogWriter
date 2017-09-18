@@ -11,7 +11,7 @@
         </div>
         <div class="row">
             <div class="comment col-xs-offset-1 col-xs-10">
-                <a class="btn btn-default" href="?controller=front&action=insertComment&id=<? echo $chapter->getId() ?>">Poster un commentaire<? if(empty($comments)) { ?> - Soyez le premier!<? } ?></a>
+                <a class="btn btn-default" href="?controller=front&amp;action=insertComment&amp;id=<? echo $chapter->getId() ?>">Poster un commentaire<? if(empty($comments)) { ?> - Soyez le premier!<? } ?></a>
                 <div class="dashed row">
                     <? if(!empty($comments)) {
                         foreach ($comments as $comment) { ?>

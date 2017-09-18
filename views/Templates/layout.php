@@ -48,11 +48,11 @@
                   <li class="dropdown"><a data-toggle="dropdown" href="">Chapitres<b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu">
                         <? foreach ($chapters as $chapter) { ?>
-                            <li><a href='?controller=front&action=show&id=<? echo $chapter->getId() ?>'>Chapitre <? echo $chapter->getNumber() ?></a></li>
+                            <li><a href='?controller=front&amp;action=show&amp;id=<? echo $chapter->getId() ?>'>Chapitre <? echo $chapter->getNumber() ?></a></li>
                         <? } ?>
                     </ul>
                   </li>
-                <li><a href="#contact">Admin</a></li>
+                <li><a href="/admin/">Admin</a></li>
               </ul>
             </div>
           </nav>

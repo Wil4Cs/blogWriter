@@ -26,7 +26,7 @@ class ChapterDAO
     {
         $db = PDOFactory::getDb();
         $result = $db->prepare('SELECT * FROM Chapters WHERE id = :id');
-        $result->bindValue(':id', $id);
+        $result->bindValue(':id', $id, \PDO::PARAM_INT);
         $result->execute();
         $sqlRow = $result->fetch();
         $result->closeCursor();
@@ -38,7 +38,7 @@ class ChapterDAO
     {
         $db = PDOFactory::getDb();
         $result = $db->prepare('SELECT '.$column['0'].' FROM Chapters WHERE '.$column['0'].' = :col');
-        $result->bindValue(':col', $column['1']);
+        $result->bindValue(':col', $column['1'], \PDO::PARAM_INT);
         $result->execute();
         // If it's matching, this means that the requested exists and return true or it returns false
         if ($result->fetch() == false) {
@@ -53,10 +53,9 @@ class ChapterDAO
     public static function count()
     {
         $db = PDOFactory::getDb();
-        $result = $db->query('SELECT COUNT(*) FROM Chapters');
+        $result = $db->query('SELECT COUNT(id) FROM Chapters');
         $count = $result->fetchColumn();
         $result->closeCursor();
-
         return $count;
     }
 }

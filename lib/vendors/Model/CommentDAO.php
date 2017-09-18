@@ -27,7 +27,7 @@ class CommentDAO
         $result = $db->prepare('INSERT INTO comments SET author = :author, content = :content, chapter = :chapter, postDate = NOW()' );
         $result->bindValue('author', $comment->getAuthor());
         $result->bindValue('content', $comment->getContent());
-        $result->bindValue('chapter', $comment->getChapter());
+        $result->bindValue('chapter', $comment->getChapter(), \PDO::PARAM_INT);
         $result->execute();
         $result->closeCursor();
     }
@@ -36,8 +36,8 @@ class CommentDAO
     {
         $db = PDOFactory::getDb();
         $result = $db->prepare('UPDATE comments SET flag = :flag WHERE id = :id');
-        $result->bindValue('flag', '1');
-        $result->bindValue('id', $id);
+        $result->bindValue('flag', '1', \PDO::PARAM_BOOL);
+        $result->bindValue('id', $id, \PDO::PARAM_INT);
         $result->execute();
         $result->closeCursor();
     }

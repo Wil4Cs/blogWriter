@@ -1,5 +1,6 @@
 <?php
 namespace Controller;
+use Entity\Chapter;
 use Model\ChapterDAO;
 use Model\CommentDAO;
 use Entity\Comment;
@@ -83,7 +84,7 @@ class FrontController
                 ]);
                 CommentDAO::addComment($comment);
                 // Redirect browser to the correct show page
-                header('Location:'.$_SERVER['HTTP_ORIGIN'].'?controller='.$_GET['controller'].'&action=show&id='.$_GET['id']);
+                header('Location:'.$_SERVER['REQUEST_URI'].'?controller='.$_GET['controller'].'&action=show&id='.$_GET['id']);
                 return $this->show();
             }
         } else {
