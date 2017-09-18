@@ -1,7 +1,7 @@
 <div class="container">
     <section class="row insertComment well">
         <form action="" method="post">
-            <legend class="legInsCom">Ajouter un commentaire</legend>
+            <legend class="legendInsCom">Ajouter un commentaire</legend>
             <div class="form-group col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6">
                 <label for="pseudo">Pseudo : </label>
                 <div class="input-group">

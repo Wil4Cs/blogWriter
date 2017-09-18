@@ -17,7 +17,7 @@
     <title>Billet simple pour l'Alaska</title>
   </head>
 
-  <body id="page-top">
+  <body id="frontend">
 
       <!-- Header
       ================================================== -->
@@ -81,7 +81,7 @@
           </a>
         </div>
         <div class="row pull-right backToTop">
-          <a class="btn btn-default" href="#page-top" aria-label="Back to Top">
+          <a class="btn btn-default" href="#frontend" aria-label="Back to Top">
             <i class="fa fa-arrow-up" aria-hidden="true"></i>
           </a>
         </div>

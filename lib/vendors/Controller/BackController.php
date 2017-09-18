@@ -28,16 +28,22 @@ class BackController
 
     public function index()
     {
-        // Go to admin page if he is already authenticated
+        // Go to Backend page if he is already authenticated
         if ($this->_admin->isAuthenticated())
         {
-            require_once('../views/Admin/index.php');
+            ob_start();
+            require_once('../views/Backend/index.php');
+            $content = ob_get_clean();
+            require_once ('../views/Templates/backLayout.php');
         }
 
-        // Go to connexion page if the form is not send and admin is not authenticated
+        // Go to connexion page if the form is not send and Backend is not authenticated
         if (!isset($_POST['login']) && !$this->_admin->isAuthenticated())
         {
-            require_once('../views/Admin/connexion.php');
+            ob_start();
+            require_once('../views/Backend/connection.php');
+            $content = ob_get_clean();
+            require_once ('../views/Templates/backLayout.php');
         }
 
         // If the form is send
@@ -50,12 +56,25 @@ class BackController
             if ($login == $config->get('login') && $password == $config->get('password'))
             {
                 $this->_admin->setAuthenticated(true);
-                require_once('../views/Admin/index.php');
+                ob_start();
+                require_once('../views/Backend/index.php');
+                $content = ob_get_clean();
+                require_once ('../views/Templates/backLayout.php');
 
             } else {
                 $this->_admin->setAlert('Le login ou le mot de passe est incorrect');
-                require_once('../views/Admin/connexion.php');
+                ob_start();
+                require_once('../views/Backend/connection.php');
+                $content = ob_get_clean();
+                require_once ('../views/Templates/backLayout.php');
             }
         }
     }
+
+    public function disconnect()
+    {
+        session_destroy();
+        header('Location: ?controller=front&action=index');
+    }
+
 }

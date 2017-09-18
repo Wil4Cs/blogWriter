@@ -34,7 +34,7 @@ class FrontController
         $content = ob_get_clean();
         // Return chapters in increasing order for the menu "Chapitres" in the nav-bar
         $chapters = array_reverse($chapters, true);
-        require_once('../views/Templates/layout.php');
+        require_once('../views/Templates/frontLayout.php');
     }
 
     public function show()
@@ -56,7 +56,7 @@ class FrontController
             $chapters = ChapterDAO::findAllChapters();
             // Return chapters in increasing order
             $chapters = array_reverse($chapters, true);
-            require_once('../views/Templates/layout.php');
+            require_once('../views/Templates/frontLayout.php');
         } else {
             return $this->error();
         }
@@ -74,7 +74,7 @@ class FrontController
                 $chapters = ChapterDAO::findAllChapters();
                 // Return chapters in increasing order for the menu "Chapitres" in the nav-bar
                 $chapters = array_reverse($chapters, true);
-                require_once('../views/Templates/layout.php');
+                require_once('../views/Templates/frontLayout.php');
             } else {
                 // Request method is POST so we need to insert a comment
                 $comment = new Comment([
@@ -85,7 +85,6 @@ class FrontController
                 CommentDAO::addComment($comment);
                 // Redirect browser to the correct show page
                 header('Location:?controller='.$_GET['controller'].'&action=show&id='.$_GET['id']);
-                return $this->show();
             }
         } else {
             return $this->error();

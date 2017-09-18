@@ -5,7 +5,7 @@ namespace Framework;
 session_start();
 
 /**
- * Class Admin
+ * Class Backend
  *
  * @package Framework
  */

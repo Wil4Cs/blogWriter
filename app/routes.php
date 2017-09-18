@@ -12,14 +12,13 @@ function call($controller, $action) {
     }
 
     $controller->{ $action }();
-    session_destroy();
     exit();
 }
 
 // Add an entry for the new controller and its actions
 $controllers = array(
     'front' => ['index', 'show', 'error', 'insertComment'],
-    'back'  => ['index']
+    'back'  => ['index', 'disconnect']
 );
 
 if (array_key_exists($controller, $controllers)) {
