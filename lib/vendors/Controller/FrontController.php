@@ -84,7 +84,7 @@ class FrontController
                 ]);
                 CommentDAO::addComment($comment);
                 // Redirect browser to the correct show page
-                header('Location:'.$_SERVER['REQUEST_URI'].'?controller='.$_GET['controller'].'&action=show&id='.$_GET['id']);
+                header('Location:?controller='.$_GET['controller'].'&action=show&id='.$_GET['id']);
                 return $this->show();
             }
         } else {

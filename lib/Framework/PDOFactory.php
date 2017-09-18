@@ -3,9 +3,17 @@
 namespace Framework;
 
 
+/**
+ * Class PDOFactory
+ *
+ * @package Framework
+ */
 class PDOFactory
 {
 
+    /**
+     * @return \PDO
+     */
     public static function getDb()
     {
         try {

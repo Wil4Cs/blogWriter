@@ -1,31 +1,41 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: wilfriedcottineau
- * Date: 16/09/2017
- * Time: 13:19
- */
+
 
 namespace Framework;
 
 
+/**
+ * Class Config
+ *
+ * @package Framework
+ */
 class Config
 {
-    private static $_credentials = [];
+    /**
+     * @var array
+     */
+    private $_credentials = [];
 
-    public static function get($var)
+    /**
+     * @param $var
+     * @return mixed|null
+     */
+    public function get($var)
     {
-        if (empty(self::$_credentials))
+        // Load admin.json file in $_credentials if it not already loaded. It contains login and password
+        if (empty($this->_credentials))
         {
-            $config = json_decode(file_get_contents('../app/config/admin.json'), true);
+            $config = json_decode(file_get_contents('../app/config/admin.json'));
             foreach ($config as $key => $value)
             {
-                self::$_credentials[$key] = $value;
+                $this->_credentials[$key] = $value;
             }
         }
-        if (isset(self::$_credentials[$var]))
+
+        // First, check if $var is set in $_credentials and then return its value
+        if (isset($this->_credentials[$var]))
         {
-            return self::$_credentials[$var];
+            return $this->_credentials[$var];
         }
 
         return null;

@@ -7,4 +7,5 @@
     <input type="password" name="password" /><br /><br />
 
     <input type="submit" value="connexion" />
+    <? if ($this->_admin->hasAlert()) echo '<p>' .$this->_admin->getAlert(). '</p>' ?>
 </form>
