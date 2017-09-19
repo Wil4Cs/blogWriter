@@ -3,15 +3,18 @@
 namespace Model;
 
 
-use Framework\PDOFactory;
 use Entity\Chapter;
 
-class ChapterDAO
+/**
+ * Class ChapterDAO
+ *
+ * @package Model
+ */
+class ChapterDAO extends DAO
 {
-    public static function findAllChapters()
+    public function findAllChapters()
     {
-        $db = PDOFactory::getDb();
-        $result = $db->query('SELECT * FROM Chapters ORDER BY id DESC');
+        $result = $this->_db->query('SELECT * FROM Chapters ORDER BY id DESC');
         $chaptersList = array();
         $chapters = $result->fetchAll();
         foreach ($chapters as $sqlRow)
@@ -22,22 +25,19 @@ class ChapterDAO
         return $chaptersList;
     }
 
-    public static function find($id)
+    public function find($id)
     {
-        $db = PDOFactory::getDb();
-        $result = $db->prepare('SELECT * FROM Chapters WHERE id = :id');
+        $result = $this->_db->prepare('SELECT * FROM Chapters WHERE id = :id');
         $result->bindValue(':id', $id, \PDO::PARAM_INT);
         $result->execute();
-        $sqlRow = $result->fetch();
+        $dbRow = $result->fetch();
         $result->closeCursor();
-
-        return $chapter = new Chapter($sqlRow);
+        return $chapter = new Chapter($dbRow);
     }
 
-    public static function ifExists(array $column)
+    public function ifExists(array $column)
     {
-        $db = PDOFactory::getDb();
-        $result = $db->prepare('SELECT '.$column['0'].' FROM Chapters WHERE '.$column['0'].' = :col');
+        $result = $this->_db->prepare('SELECT '.$column['0'].' FROM Chapters WHERE '.$column['0'].' = :col');
         $result->bindValue(':col', $column['1'], \PDO::PARAM_INT);
         $result->execute();
         // If it's matching, this means that the requested exists and return true or it returns false
@@ -50,10 +50,10 @@ class ChapterDAO
         return true;
     }
 
-    public static function count()
+    public function count()
     {
-        $db = PDOFactory::getDb();
-        $result = $db->query('SELECT COUNT(id) FROM Chapters');
+
+        $result = $this->_db->query('SELECT COUNT(id) FROM Chapters');
         $count = $result->fetchColumn();
         $result->closeCursor();
         return $count;

@@ -14,7 +14,7 @@ class PDOFactory
     /**
      * @return \PDO
      */
-    public static function getDb()
+    public static function getMySQL()
     {
         try {
             $config = parse_ini_file('../app/config/dbSettings.ini');

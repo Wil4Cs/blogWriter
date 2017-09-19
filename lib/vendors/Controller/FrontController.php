@@ -1,6 +1,8 @@
 <?php
+
 namespace Controller;
-use Entity\Chapter;
+
+
 use Model\ChapterDAO;
 use Model\CommentDAO;
 use Entity\Comment;
@@ -17,7 +19,8 @@ class FrontController
     public function index()
     {
         $maxLengthContent = '450';
-        $chapters = ChapterDAO::findAllChapters();
+        $chaptersList = new ChapterDAO();
+        $chapters = $chaptersList->findAllChapters();
         // Wrap content if it is higher than maxLengthContent
         foreach ($chapters as $chapter) {
             if (strlen($chapter->getContent()) > $maxLengthContent) {
@@ -39,21 +42,23 @@ class FrontController
 
     public function show()
     {
+        $chapterObject = new ChapterDAO();
         // Check whether the identifier is set, is an integer number and if the chapter id exists OR we return the error page
-        if (isset($_GET['id']) && ctype_digit($_GET['id']) && ChapterDAO::ifExists(array('id', $_GET['id']))) {
+        if (isset($_GET['id']) && ctype_digit($_GET['id']) && $chapterObject->ifExists(array('id', $_GET['id']))) {
             // Find the chapter to show
-            $chapter = ChapterDAO::find($_GET['id']);
+            $chapter = $chapterObject->find($_GET['id']);
             // Check if a comment has just been mention
+            $commentObject = new CommentDAO();
             if (array_key_exists('commentId', $_POST)) {
-                CommentDAO::cautionComment($_POST['commentId']);
+                $commentObject->cautionComment($_POST['commentId']);
             }
             //Get all chapter's comments
-            $comments = CommentDAO::getListOfComments($_GET['id']);
+            $comments = $commentObject->getListOfComments($_GET['id']);
             ob_start();
             require_once('../views/Chapters/show.php');
             $content = ob_get_clean();
             //Get all chapter's for the menu "Chapitres" in the nav-bar
-            $chapters = ChapterDAO::findAllChapters();
+            $chapters = $chapterObject->findAllChapters();
             // Return chapters in increasing order
             $chapters = array_reverse($chapters, true);
             require_once('../views/Templates/frontLayout.php');
@@ -64,14 +69,15 @@ class FrontController
 
     public function insertComment()
     {
+        $chapterObject = new ChapterDAO();
         // Check whether the identifier is set, is an integer number and if the chapter id exists OR we return the error page
-        if (isset($_GET['id']) && ctype_digit($_GET['id']) && ChapterDAO::ifExists(array('id', $_GET['id']))) {
+        if (isset($_GET['id']) && ctype_digit($_GET['id']) && $chapterObject->ifExists(array('id', $_GET['id']))) {
             // Request method is GET so we need to post up the form
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 ob_start();
                 require_once('../views/Chapters/insertComment.php');
                 $content = ob_get_clean();
-                $chapters = ChapterDAO::findAllChapters();
+                $chapters = $chapterObject->findAllChapters();
                 // Return chapters in increasing order for the menu "Chapitres" in the nav-bar
                 $chapters = array_reverse($chapters, true);
                 require_once('../views/Templates/frontLayout.php');
@@ -82,9 +88,10 @@ class FrontController
                     'author'    => $_POST['pseudo'],
                     'content'   => $_POST['commentContent']
                 ]);
-                CommentDAO::addComment($comment);
+                $commentObject = new CommentDAO();
+                $commentObject->addComment($comment);
                 // Redirect browser to the correct show page
-                header('Location:?controller='.$_GET['controller'].'&action=show&id='.$_GET['id']);
+                header('Location: ?controller='.$_GET['controller'].'&action=show&id='.$_GET['id']);
             }
         } else {
             return $this->error();

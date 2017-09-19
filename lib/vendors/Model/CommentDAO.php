@@ -2,29 +2,33 @@
 
 namespace Model;
 
-use Entity\Comment;
-use Framework\PDOFactory;
 
-class CommentDAO
+use Entity\Comment;
+
+/**
+ * Class CommentDAO
+ *
+ * @package Model
+ */
+class CommentDAO extends DAO
 {
-    public static function getListOfComments($chapter)
+    public function getListOfComments($chapter)
     {
-        $db = PDOFactory::getDb();
-        $result = $db->query('SELECT * FROM comments WHERE chapter =' .$chapter. ' ORDER BY id DESC');
-        $comments = $result->fetchAll();
+        $result = $this->_db->prepare('SELECT * FROM comments WHERE chapter = :chapter ORDER BY id DESC');
+        $result->bindValue('chapter', $chapter, \PDO::PARAM_INT);
+        $result->execute();
         $commentList = array();
-        foreach ($comments as $sqlRow)
+        foreach ($result as $dbRow)
         {
-            $commentList[] = new Comment($sqlRow);
+            $commentList[] = new Comment($dbRow);
         }
         $result->closeCursor();
         return $commentList;
     }
 
-    public static function addComment(Comment $comment)
+    public function addComment(Comment $comment)
     {
-        $db = PDOFactory::getDb();
-        $result = $db->prepare('INSERT INTO comments SET author = :author, content = :content, chapter = :chapter, postDate = NOW()' );
+        $result = $this->_db->prepare('INSERT INTO comments SET author = :author, content = :content, chapter = :chapter, postDate = NOW()' );
         $result->bindValue('author', $comment->getAuthor());
         $result->bindValue('content', $comment->getContent());
         $result->bindValue('chapter', $comment->getChapter(), \PDO::PARAM_INT);
@@ -32,10 +36,9 @@ class CommentDAO
         $result->closeCursor();
     }
 
-    public static function cautionComment($id)
+    public function cautionComment($id)
     {
-        $db = PDOFactory::getDb();
-        $result = $db->prepare('UPDATE comments SET flag = :flag WHERE id = :id');
+        $result = $this->_db->prepare('UPDATE comments SET flag = :flag WHERE id = :id');
         $result->bindValue('flag', '1', \PDO::PARAM_BOOL);
         $result->bindValue('id', $id, \PDO::PARAM_INT);
         $result->execute();
