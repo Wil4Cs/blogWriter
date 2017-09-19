@@ -1,14 +1,14 @@
 <?php
 
-namespace Model;
+namespace DAO;
 
 
-use Entity\Comment;
+use Model\Comment;
 
 /**
  * Class CommentDAO
  *
- * @package Model
+ * @package DAO
  */
 class CommentDAO extends DAO
 {

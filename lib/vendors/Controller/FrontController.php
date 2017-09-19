@@ -3,9 +3,9 @@
 namespace Controller;
 
 
-use Model\ChapterDAO;
-use Model\CommentDAO;
-use Entity\Comment;
+use DAO\ChapterDAO;
+use DAO\CommentDAO;
+use Model\Comment;
 /**
  * Class PagesController
  */
@@ -19,8 +19,8 @@ class FrontController
     public function index()
     {
         $maxLengthContent = '450';
-        $chaptersList = new ChapterDAO();
-        $chapters = $chaptersList->findAllChapters();
+        $chapterDAO = new ChapterDAO();
+        $chapters = $chapterDAO->findAllChapters();
         // Wrap content if it is higher than maxLengthContent
         foreach ($chapters as $chapter) {
             if (strlen($chapter->getContent()) > $maxLengthContent) {
@@ -42,23 +42,23 @@ class FrontController
 
     public function show()
     {
-        $chapterObject = new ChapterDAO();
+        $chapterDAO = new ChapterDAO();
         // Check whether the identifier is set, is an integer number and if the chapter id exists OR we return the error page
-        if (isset($_GET['id']) && ctype_digit($_GET['id']) && $chapterObject->ifExists(array('id', $_GET['id']))) {
+        if (isset($_GET['id']) && ctype_digit($_GET['id']) && $chapterDAO->ifExists(array('id', $_GET['id']))) {
             // Find the chapter to show
-            $chapter = $chapterObject->find($_GET['id']);
+            $chapter = $chapterDAO->find($_GET['id']);
             // Check if a comment has just been mention
-            $commentObject = new CommentDAO();
+            $commentDAO = new CommentDAO();
             if (array_key_exists('commentId', $_POST)) {
-                $commentObject->cautionComment($_POST['commentId']);
+                $commentDAO->cautionComment($_POST['commentId']);
             }
             //Get all chapter's comments
-            $comments = $commentObject->getListOfComments($_GET['id']);
+            $comments = $commentDAO->getListOfComments($_GET['id']);
             ob_start();
             require_once('../views/Chapters/show.php');
             $content = ob_get_clean();
             //Get all chapter's for the menu "Chapitres" in the nav-bar
-            $chapters = $chapterObject->findAllChapters();
+            $chapters = $chapterDAO->findAllChapters();
             // Return chapters in increasing order
             $chapters = array_reverse($chapters, true);
             require_once('../views/Templates/frontLayout.php');
@@ -69,15 +69,15 @@ class FrontController
 
     public function insertComment()
     {
-        $chapterObject = new ChapterDAO();
+        $chapterDAO = new ChapterDAO();
         // Check whether the identifier is set, is an integer number and if the chapter id exists OR we return the error page
-        if (isset($_GET['id']) && ctype_digit($_GET['id']) && $chapterObject->ifExists(array('id', $_GET['id']))) {
+        if (isset($_GET['id']) && ctype_digit($_GET['id']) && $chapterDAO->ifExists(array('id', $_GET['id']))) {
             // Request method is GET so we need to post up the form
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 ob_start();
                 require_once('../views/Chapters/insertComment.php');
                 $content = ob_get_clean();
-                $chapters = $chapterObject->findAllChapters();
+                $chapters = $chapterDAO->findAllChapters();
                 // Return chapters in increasing order for the menu "Chapitres" in the nav-bar
                 $chapters = array_reverse($chapters, true);
                 require_once('../views/Templates/frontLayout.php');
@@ -88,8 +88,8 @@ class FrontController
                     'author'    => $_POST['pseudo'],
                     'content'   => $_POST['commentContent']
                 ]);
-                $commentObject = new CommentDAO();
-                $commentObject->addComment($comment);
+                $commentDAO = new CommentDAO();
+                $commentDAO->addComment($comment);
                 // Redirect browser to the correct show page
                 header('Location: ?controller='.$_GET['controller'].'&action=show&id='.$_GET['id']);
             }

@@ -1,24 +1,24 @@
 <?php
 
-namespace Entity;
+namespace Model;
 
 
 /**
- * Class Chapter
+ * Class Comment
  *
- * @package Entity
+ * @package Model
  */
-class Chapter
+class Comment
 {
-    private $_id;
-    private $_number;
     private $_author;
-    private $_title;
+    private $_chapter;
     private $_content;
     private $_date;
+    private $_flag;
+    private $_id;
 
     /**
-     * Chapter constructor.
+     * Comment constructor.
      *
      * @param array $data
      */
@@ -50,6 +50,14 @@ class Chapter
     /**
      * @return mixed
      */
+    public function getChapter()
+    {
+        return $this->_chapter;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getContent()
     {
         return $this->_content;
@@ -66,25 +74,17 @@ class Chapter
     /**
      * @return mixed
      */
+    public function getFlag()
+    {
+        return $this->_flag;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->_id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNumber()
-    {
-        return $this->_number;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTitle()
-    {
-        return $this->_title;
     }
 
     // SETTERS //
@@ -102,18 +102,33 @@ class Chapter
     }
 
     /**
+     * @param $chapter
+     */
+    public function setChapter($chapter)
+    {
+        $this->_chapter = (int)$chapter;
+    }
+
+    /**
      * @param $content
      * @return null
      */
     public function setContent($content)
     {
-        if (empty($content) || !is_string($content))
+        if(empty($content)  || !is_string($content))
         {
             return null;
         }
         $this->_content = $content;
     }
 
+    /**
+     * @param mixed $flag
+     */
+    public function setFlag($flag)
+    {
+        $this->_flag = $flag;
+    }
 
     /**
      * @param mixed $id
@@ -124,37 +139,10 @@ class Chapter
     }
 
     /**
-     * @param $number
-     * @return null
-     */
-    public function setNumber($number)
-    {
-        if (empty($number) || !ctype_digit($number))
-        {
-            return null;
-        }
-        $this->_number = $number;
-    }
-
-
-    /**
      * @param $date
      */
     public function setPostDate($date)
     {
         $this->_date = new \DateTime($date);
-    }
-
-    /**
-     * @param $title
-     * @return null
-     */
-    public function setTitle($title)
-    {
-        if (empty($title) || !is_string($title))
-        {
-            return null;
-        }
-        $this->_title = $title;
     }
 }

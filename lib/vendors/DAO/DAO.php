@@ -1,13 +1,13 @@
 <?php
 
-namespace Model;
+namespace DAO;
 
 use Framework\PDOFactory;
 
 /**
  * Class DAO
  *
- * @package Model
+ * @package DAO
  */
 class DAO
 {

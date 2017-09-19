@@ -18,10 +18,10 @@ $frameworkLoader->register();
 $controllerLoader = new SplClassLoader('Controller', __DIR__. '/../lib/vendors');
 $controllerLoader->register();
 
-$entityLoader = new SplClassLoader('Entity', __DIR__. '/../lib/vendors');
+$entityLoader = new SplClassLoader('Model', __DIR__. '/../lib/vendors');
 $entityLoader->register();
 
-$modelLoader = new SplClassLoader('Model', __DIR__. '/../lib/vendors');
+$modelLoader = new SplClassLoader('DAO', __DIR__. '/../lib/vendors');
 $modelLoader->register();
 
 require_once ('../app/routes.php');

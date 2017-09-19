@@ -1,14 +1,14 @@
 <?php
 
-namespace Model;
+namespace DAO;
 
 
-use Entity\Chapter;
+use Model\Chapter;
 
 /**
  * Class ChapterDAO
  *
- * @package Model
+ * @package DAO
  */
 class ChapterDAO extends DAO
 {
@@ -17,9 +17,9 @@ class ChapterDAO extends DAO
         $result = $this->_db->query('SELECT * FROM Chapters ORDER BY id DESC');
         $chaptersList = array();
         $chapters = $result->fetchAll();
-        foreach ($chapters as $sqlRow)
+        foreach ($chapters as $dbRow)
         {
-            $chaptersList[] = new Chapter($sqlRow);
+            $chaptersList[] = new Chapter($dbRow);
         }
         $result->closeCursor();
         return $chaptersList;
