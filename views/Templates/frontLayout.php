@@ -9,10 +9,10 @@
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Kaushan+Script|Chewy|Maven+Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Kaushan+Script|Maven+Pro" rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/front.css">
     <!-- Title -->
     <title>Billet simple pour l'Alaska</title>
   </head>
@@ -30,8 +30,8 @@
 
       <!-- Navigation
       ================================================== -->
-      <div class="container">
-        <div class="row ">
+      <div class="front-page-content container">
+        <div class="row">
           <nav class="navbar navbar-light" role="navigation">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -48,11 +48,11 @@
                   <li class="dropdown"><a data-toggle="dropdown" href="">Chapitres<b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu">
                         <? foreach ($chapters as $chapter) { ?>
-                            <li><a href='?controller=front&amp;action=show&amp;id=<? echo $chapter->getId() ?>'>Chapitre <? echo $chapter->getNumber() ?></a></li>
+                            <li><a href='?controller=front&amp;action=show&amp;id=<? echo $chapter->getId() ?>' aria-label="book"><i class="fa fa-book" aria-hidden="true"></i>&nbsp;Chapitre <? echo $chapter->getNumber() ?></a></li>
                         <? } ?>
                     </ul>
                   </li>
-                <li><a href="/admin">Admin</a></li>
+                <? if ($user->isAuthenticated()) { ?><li><a href="?controller=back&amp;action=index">Admin</a></li><? } ?>
               </ul>
             </div>
           </nav>

@@ -39,6 +39,7 @@ class CommentDAO extends DAO
     public function cautionComment($id)
     {
         $result = $this->_db->prepare('UPDATE comments SET flag = :flag WHERE id = :id');
+        // Value 1 means the comment is now warned => flag = TRUE
         $result->bindValue('flag', '1', \PDO::PARAM_BOOL);
         $result->bindValue('id', $id, \PDO::PARAM_INT);
         $result->execute();

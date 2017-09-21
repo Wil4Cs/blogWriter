@@ -14,7 +14,7 @@ class ChapterDAO extends DAO
 {
     public function findAllChapters()
     {
-        $result = $this->_db->query('SELECT * FROM Chapters ORDER BY id DESC');
+        $result = $this->_db->query('SELECT * FROM chapters ORDER BY id DESC');
         $chaptersList = array();
         $chapters = $result->fetchAll();
         foreach ($chapters as $dbRow)
@@ -27,7 +27,7 @@ class ChapterDAO extends DAO
 
     public function find($id)
     {
-        $result = $this->_db->prepare('SELECT * FROM Chapters WHERE id = :id');
+        $result = $this->_db->prepare('SELECT * FROM chapters WHERE id = :id');
         $result->bindValue(':id', $id, \PDO::PARAM_INT);
         $result->execute();
         $dbRow = $result->fetch();
@@ -53,7 +53,7 @@ class ChapterDAO extends DAO
     public function count()
     {
 
-        $result = $this->_db->query('SELECT COUNT(id) FROM Chapters');
+        $result = $this->_db->query('SELECT COUNT(id) FROM chapters');
         $count = $result->fetchColumn();
         $result->closeCursor();
         return $count;

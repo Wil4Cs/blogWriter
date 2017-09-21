@@ -6,11 +6,25 @@ namespace Controller;
 use DAO\ChapterDAO;
 use DAO\CommentDAO;
 use Model\Comment;
+use Framework\User;
 /**
  * Class PagesController
  */
 class FrontController
 {
+    /**
+     * @var User
+     */
+    private $_user;
+
+    /**
+     * BackController constructor.
+     */
+    public function __construct()
+    {
+        $this->_user = new User();
+    }
+
     public function error()
     {
         require_once('../views/Chapters/error.php');
@@ -35,6 +49,7 @@ class FrontController
         ob_start();
         require_once('../views/Chapters/index.php');
         $content = ob_get_clean();
+        $user = $this->_user;
         // Return chapters in increasing order for the menu "Chapitres" in the nav-bar
         $chapters = array_reverse($chapters, true);
         require_once('../views/Templates/frontLayout.php');
@@ -59,6 +74,7 @@ class FrontController
             $content = ob_get_clean();
             //Get all chapter's for the menu "Chapitres" in the nav-bar
             $chapters = $chapterDAO->findAllChapters();
+            $user = $this->_user;
             // Return chapters in increasing order
             $chapters = array_reverse($chapters, true);
             require_once('../views/Templates/frontLayout.php');
@@ -72,6 +88,7 @@ class FrontController
         $chapterDAO = new ChapterDAO();
         // Check whether the identifier is set, is an integer number and if the chapter id exists OR we return the error page
         if (isset($_GET['id']) && ctype_digit($_GET['id']) && $chapterDAO->ifExists(array('id', $_GET['id']))) {
+            $user = $this->_user;
             // Request method is GET so we need to post up the form
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 ob_start();

@@ -4,7 +4,7 @@ namespace Controller;
 
 
 use Framework\Config;
-use Framework\Admin;
+use Framework\User;
 
 /**
  * Class BackController
@@ -14,22 +14,23 @@ use Framework\Admin;
 class BackController
 {
     /**
-     * @var Admin
+     * @var User
      */
-    private $_admin;
+    private $_user;
 
     /**
      * BackController constructor.
      */
     public function __construct()
     {
-        $this->_admin = new Admin();
+        $this->_user = new User();
     }
 
     public function index()
     {
+        $user = $this->_user;
         // Go to Backend page if he is already authenticated
-        if ($this->_admin->isAuthenticated())
+        if ($user->isAuthenticated())
         {
             ob_start();
             require_once('../views/Backend/index.php');
@@ -38,7 +39,7 @@ class BackController
         }
 
         // Go to connexion page if the form is not send and Backend is not authenticated
-        if (!isset($_POST['login']) && !$this->_admin->isAuthenticated())
+        if (!isset($_POST['login']) && !$user->isAuthenticated())
         {
             ob_start();
             require_once('../views/Backend/connection.php');
@@ -55,14 +56,14 @@ class BackController
             // And if login and password are correct
             if ($login == $config->get('login') && $password == $config->get('password'))
             {
-                $this->_admin->setAuthenticated(true);
+                $user->setAuthenticated(true);
                 ob_start();
                 require_once('../views/Backend/index.php');
                 $content = ob_get_clean();
                 require_once ('../views/Templates/backLayout.php');
 
             } else {
-                $this->_admin->setAlert('Le login ou le mot de passe est incorrect');
+                $user->setAlert('Le login ou le mot de passe est incorrect');
                 ob_start();
                 require_once('../views/Backend/connection.php');
                 $content = ob_get_clean();

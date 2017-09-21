@@ -1,4 +1,9 @@
-<section class=" container well">
-    <h1>Bienvenue sur la page administrateur</h1>
-    <p><a href="?controller=back&amp;action=disconnect">Disconnect</a> </p>
-</section>
+<div class="col-xs-12 panel panel-warning">
+    <div class="panel-heading">
+        <h3 class="panel-title">Titre</h3>
+    </div>
+    <div class="panel-body">
+        <p>Currently, <? ?> chapters have been published!</p>
+        <p>No comments has been warned!</p>
+    </div>
+</div>

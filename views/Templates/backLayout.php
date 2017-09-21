@@ -9,10 +9,10 @@
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Kaushan+Script|Chewy|Maven+Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Kaushan+Script|Maven+Pro" rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/back.css">
     <!-- Title -->
     <title>Administration</title>
 </head>
@@ -27,40 +27,56 @@
     <div class="col-md-3 text-center"><p>par Jean Forteroche</p></div>
 </header>
 
-<!-- Navigation
+<!-- Dashboard Header
 ================================================== -->
+<? if ($user->isAuthenticated()) { ?>
 <div class="container">
-    <div class="row ">
-        <nav class="navbar navbar-light" role="navigation">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="visible-xs navbar-brand"><img src="img/mountains.png" alt="Mountains"></a>
-            </div>
+    <div class="page-title row">
+        <h1 class="col-xs-12">DASHBOARD</h1>
+    </div>
+    <!-- Navigation
+    ============================================== -->
+    <div class="row nav-content">
+        <nav class="nav col-xs-12 col-sm-2">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
             <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a class="accueil" href="/">Accueil</a></li>
-                    <li class="dropdown"><a data-toggle="dropdown" href="">Chapitres<b class="caret"></b></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <? foreach ($chapters as $chapter) { ?>
-                                <li><a href='?controller=front&amp;action=show&amp;id=<? echo $chapter->getId() ?>'>Chapitre <? echo $chapter->getNumber() ?></a></li>
-                            <? } ?>
-                        </ul>
+                <ul class="nav">
+                    <li><a href="?controller=back&action=index">Admin</a></li>
+                    <li><a href="/">Accueil</a></li>
+                    <li class="dropdown">
+                        <a data-toggle="collapse" href="#item">Chapters<b class="caret"></b></a>
+                        <div id="item" class="collapse">
+                            <p><a href="#">Chapter</a></p>
+                            <p><a href="#">Chapter</a></p>
+                        </div>
                     </li>
-                    <li><a href="/admin">Admin</a></li>
+                    <li><a href="#">Comments</a></li>
                 </ul>
             </div>
         </nav>
+        <!-- Section
+        ================================================== -->
+        <section class="col-xs-12 col-sm-10 page-content">
+            <div class="col-xs-12">
+                <h3 class="col-xs-8">Welcome Admin</h3>
+                <a class="log-out col-xs-4 log" href="?controller=back&amp;action=disconnect">Log-out&nbsp;<i class="fa fa-lg fa-sign-out" aria-hidden="true"></i></a>
+                <p class="col-xs-12">What would you like to do?</p>
+            </div>
+            <div class="link-buttons col-xs-12">
+                <div class="col-xs-3 col-sm-3 col-sm-offset-0 col-md-2"><button><a href=""><i class="col-xs-12 fa fa-2x fa-pencil" aria-hidden="true"></i>Add Chapter</a></button></div>
+                <div class="col-xs-3 col-sm-3 col-sm-offset-0 col-md-2"><button><a href=""><i class="col-xs-12 fa fa-2x fa-comments-o" aria-hidden="true"></i>Add Comment</a></button></div>
+                <div class="col-xs-3 col-sm-3 col-sm-offset-0 col-md-2"><button><a href=""><i class="col-xs-12 fa fa-2x fa-pencil" aria-hidden="true"></i>Edit Chapter</a></button></div>
+                <div class="col-xs-3 col-sm-3 col-sm-offset-0 col-md-2"><button><a href=""><i class="col-xs-12 fa fa-2x fa-comments-o" aria-hidden="true"></i>Edit Comment</a></button></div>
+            </div>
+            <? echo $content ?>
+        </section>
     </div>
 </div>
-
-<!-- Section
-================================================== -->
-<? echo $content ?>
+<? } else echo $content ?>
 
 
 <!-- jQuery -->

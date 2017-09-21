@@ -9,9 +9,8 @@ session_start();
  *
  * @package Framework
  */
-class Admin
+class User
 {
-
     /**
      * @return bool
      */

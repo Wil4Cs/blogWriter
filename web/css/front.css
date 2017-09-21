@@ -1,19 +1,14 @@
-/* ===== General Style ===== */
+/* ===== GENERAL STYLE ===== */
 
 body {
     padding-top: 10px;
     font-family: 'Maven Pro', sans-serif;
     font-size: 1.8em;
     color: #8C919B;
-}
-#frontend {
     background: -webkit-linear-gradient(top right, #FFFFFF, #85F2F7, #31E1F7, #243BF7); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(top right, #FFFFFF, #85F2F7, #31E1F7, #243BF7); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(top right, #FFFFFF, #85F2F7, #31E1F7, #243BF7); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to top right, #FFFFFF, #85F2F7, #31E1F7, #243BF7); /* Standard syntax (must be last) */
-}
-#backend {
-    background-color: #00aced;
 }
 
 /* ===== LAYOUT ===== */
@@ -26,7 +21,7 @@ header #monCarousel img {
     width: 100%;
 }
 
-/* --- Header Title --- */
+/* --- Header --- */
 header h1 {
     font-family: 'Kaushan Script', cursive;
     color: #FFFFFF;
@@ -47,51 +42,51 @@ header p {
 }
 
 /* --- Navbar --- */
-.navbar {
+.front-page-content .navbar {
     background-color: #F7F7F7;
     margin-bottom: 0px;
     border-radius: 4px 4px 0 0;
 }
-.navbar .navbar-nav {
+.front-page-content .navbar .navbar-nav {
     display: inline-block;
     float: none;
 }
-.navbar-brand {
+.front-page-content .navbar-brand {
     padding-left: 20px;
     margin-top: -22px;
 }
-.navbar .navbar-collapse {
+.front-page-content .navbar .navbar-collapse {
     text-align: center;
 }
-.icon-bar {
+.front-page-content .icon-bar {
     background-color: #808080;
 }
-.navbar-toggle {
+.front-page-content .navbar-toggle {
     margin: 20px 20px 20px 0;
     border: solid #808080 1px;
 }
 /* Navbar link */
-.nav li {
+.front-page-content .nav li {
     margin: 5px 5px 0px 5px;
     width: 140px;
     border-radius: 10px;
     background-color: #F7F7F7;
 }
-.nav li .accueil {
+.front-page-content .nav li .accueil {
     background-color: #FFFFFF;
 }
-.nav li .accueil:hover {
+.front-page-content .nav li .accueil:hover {
     background-color: #FFFFFF;
 }
-.nav li a {
+.front-page-content .nav li a {
     color: #8C919B;
 }
-.nav li a:hover{
+.front-page-content .nav li a:hover{
     background-color:#F0F0F0;
     border-radius: 10px;
 }
 /* Navbar Dropdown Menu */
-.dropdown-menu > li > a:hover {
+.front-page-content .dropdown-menu > li > a:hover {
     color: #6C6C6C;
 }
 
@@ -132,6 +127,7 @@ footer .backToTop {
     border-bottom: solid #D8D8D8 1px;
     background-color: #FFFFFF;
 }
+
 .chapters h1 {
     color: #666666;
 }
@@ -253,20 +249,19 @@ footer .backToTop {
     text-align: right;
     margin: 15px 15px 0px 0px;
 }
-/* ===== INSERTCOMMENT & CONNECTION ===== */
-.legendInsCom, .legendConnection{
+
+/* ===== INSERT COMMENT ===== */
+
+.legendInsCom {
     text-align: center;
     color: #666666;
 }
-.insertComment, .connection {
+.insertComment {
     margin-top: 0px;
     border-radius: 0 0 10px 10px;
 }
-.connection .help-block {
-    text-align: center;
-}
 
-/* ===== Media Queries ===== */
+/* ===== MEDIA QUERIES ===== */
 
 @media (max-width: 767px) {
     .img-circle {
@@ -289,7 +284,7 @@ footer .backToTop {
         margin-right: 11px;
     }
 }
-@media (min-width: 768px){
+@media (min-width: 768px) {
     .img-circle {
         width: 230px;
         height: 230px;
@@ -313,7 +308,10 @@ footer .backToTop {
         margin-left: 10px;
     }
 }
-@media (min-width: 992px){
+@media (min-width: 992px) {
+    header p {
+        padding-top: 90px;
+    }
     .img-circle {
         width: 250px;
         height: 250px;
@@ -332,9 +330,6 @@ footer .backToTop {
     }
     #monCarousel img {
         max-height: 540px;
-    }
-    header p {
-        padding-top: 90px;
     }
     footer .btn-default {
         margin-left: 20px;
