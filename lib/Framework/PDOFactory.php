@@ -2,7 +2,6 @@
 
 namespace Framework;
 
-
 /**
  * Class PDOFactory
  *
@@ -17,7 +16,7 @@ class PDOFactory
     public static function getMySQL()
     {
         try {
-            $config = parse_ini_file('../app/config/dbSettings.ini');
+            $config = parse_ini_file('../App/config/dbSettings.ini');
             $db = new \PDO('mysql:host='.$config['db_host']. ';dbname='.$config['db_name'], $config['db_user'], $config['db_password']);
             $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch (\PDOException $e) {

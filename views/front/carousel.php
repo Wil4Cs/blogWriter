@@ -11,19 +11,19 @@
         <div class="item active">
             <img src="img/alaska1.jpg" alt="Alaska">
             <div class="carousel-caption">
-                <h3>Des paysages splendides</h3>
+                <h3>Amazing landscapes</h3>
             </div>
         </div>
         <div class="item">
             <img src="img/alaska3.jpg" alt="Alaska">
             <div class="carousel-caption">
-                <h3>Une nuit au bord de l'eau</h3>
+                <h3>One night on the water's edge</h3>
             </div>
         </div>
         <div class="item">
             <img src="img/alaska4.jpg" alt="Alaska">
             <div class="carousel-caption">
-                <h3>Une nature verdoyante</h3>
+                <h3>Luxurious nature</h3>
             </div>
         </div>
     </div>

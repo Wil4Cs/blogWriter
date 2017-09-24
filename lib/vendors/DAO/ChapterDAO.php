@@ -2,7 +2,6 @@
 
 namespace DAO;
 
-
 use Model\Chapter;
 
 /**
@@ -12,50 +11,48 @@ use Model\Chapter;
  */
 class ChapterDAO extends DAO
 {
-    public function findAllChapters()
+    public function count()
     {
-        $result = $this->_db->query('SELECT * FROM chapters ORDER BY id DESC');
-        $chaptersList = array();
-        $chapters = $result->fetchAll();
-        foreach ($chapters as $dbRow)
-        {
-            $chaptersList[] = new Chapter($dbRow);
-        }
-        $result->closeCursor();
-        return $chaptersList;
+        $req = $this->_db->query('SELECT COUNT(id) FROM chapters');
+        $count = $req->fetchColumn();
+        $req->closeCursor();
+        return $count;
     }
 
     public function find($id)
     {
-        $result = $this->_db->prepare('SELECT * FROM chapters WHERE id = :id');
-        $result->bindValue(':id', $id, \PDO::PARAM_INT);
-        $result->execute();
-        $dbRow = $result->fetch();
-        $result->closeCursor();
-        return $chapter = new Chapter($dbRow);
+        $req = $this->_db->prepare('SELECT * FROM chapters WHERE id = :id');
+        $req->bindValue(':id', $id, \PDO::PARAM_INT);
+        $req->execute();
+        $result = $req->fetch();
+        $req->closeCursor();
+        return $chapter = new Chapter($result);
     }
 
-    public function ifExists(array $column)
+    public function findAllChapters()
     {
-        $result = $this->_db->prepare('SELECT '.$column['0'].' FROM Chapters WHERE '.$column['0'].' = :col');
-        $result->bindValue(':col', $column['1'], \PDO::PARAM_INT);
-        $result->execute();
+        $req = $this->_db->query('SELECT * FROM chapters ORDER BY number DESC');
+        $chaptersList = array();
+        $result = $req->fetchAll();
+        foreach ($result as $dbRow)
+        {
+            $chaptersList[] = new Chapter($dbRow);
+        }
+        $req->closeCursor();
+        return $chaptersList;
+    }
+
+    public function ifChapterExists(array $column)
+    {
+        $req = $this->_db->prepare('SELECT '.$column['0'].' FROM chapters WHERE '.$column['0'].' = :number');
+        $req->bindValue(':number', $column['1'], \PDO::PARAM_INT);
+        $req->execute();
         // If it's matching, this means that the requested exists and return true or it returns false
-        if ($result->fetch() == false) {
-            $result->closeCursor();
+        if ($req->fetch() != true) {
+            $req->closeCursor();
             return false;
         }
-        $result->closeCursor();
-
+        $req->closeCursor();
         return true;
-    }
-
-    public function count()
-    {
-
-        $result = $this->_db->query('SELECT COUNT(id) FROM chapters');
-        $count = $result->fetchColumn();
-        $result->closeCursor();
-        return $count;
     }
 }

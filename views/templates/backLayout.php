@@ -50,11 +50,11 @@
                     <li class="dropdown">
                         <a data-toggle="collapse" href="#item">Chapters<b class="caret"></b></a>
                         <div id="item" class="collapse">
-                            <p><a href="#">Chapter</a></p>
-                            <p><a href="#">Chapter</a></p>
+                            <? foreach ($chaptersList as $chapter) { ?>
+                            <p><a href="?controller=front&amp;action=show&amp;id=<? echo $chapter->getId() ?>" aria-label="book"<i class="fa fa-book" aria-hidden="true"></i>&nbsp;Chapter <? echo $chapter->getNumber() ?></a></p>
+                            <? } ?>
                         </div>
                     </li>
-                    <li><a href="#">Comments</a></li>
                 </ul>
             </div>
         </nav>
@@ -68,9 +68,9 @@
             </div>
             <div class="link-buttons col-xs-12">
                 <div class="col-xs-3 col-sm-3 col-sm-offset-0 col-md-2"><button><a href=""><i class="col-xs-12 fa fa-2x fa-pencil" aria-hidden="true"></i>Add Chapter</a></button></div>
-                <div class="col-xs-3 col-sm-3 col-sm-offset-0 col-md-2"><button><a href=""><i class="col-xs-12 fa fa-2x fa-comments-o" aria-hidden="true"></i>Add Comment</a></button></div>
                 <div class="col-xs-3 col-sm-3 col-sm-offset-0 col-md-2"><button><a href=""><i class="col-xs-12 fa fa-2x fa-pencil" aria-hidden="true"></i>Edit Chapter</a></button></div>
-                <div class="col-xs-3 col-sm-3 col-sm-offset-0 col-md-2"><button><a href=""><i class="col-xs-12 fa fa-2x fa-comments-o" aria-hidden="true"></i>Edit Comment</a></button></div>
+                <div class="col-xs-3 col-sm-3 col-sm-offset-0 col-md-2"><button><a href="?controller=front&amp;action="><i class="col-xs-12 fa fa-2x fa-comments-o" aria-hidden="true"></i>Delete Comment</a></button></div>
+                <div class="col-xs-3 col-sm-3 col-sm-offset-0 col-md-2"><button><a href="?controller=back&amp;action=moderateComment"><i class="col-xs-12 fa fa-2x fa-comments-o" aria-hidden="true"></i>Moderate Comment</a></button></div>
             </div>
             <? echo $content ?>
         </section>

@@ -10,7 +10,7 @@ body {
 
 /* ===== LAYOUT ===== */
 
-/* --- Backend --- */
+/* --- back --- */
 #backend {
     background-color: #2C3742;
 }
@@ -162,6 +162,11 @@ header p {
 }
 .connection .help-block {
     text-align: center;
+}
+
+/* ===== DELETE COMMENT ===== */
+.trash {
+    margin-left: 15px;
 }
 
 /* ===== MEDIA QUERIES ===== */

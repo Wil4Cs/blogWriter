@@ -2,34 +2,13 @@
 
 namespace Framework;
 
-session_start();
-
 /**
- * Class Backend
+ * Class back
  *
  * @package Framework
  */
 class User
 {
-    /**
-     * @return bool
-     */
-    public function isAuthenticated()
-    {
-        return isset($_SESSION['auth']) && $_SESSION['auth'] === true;
-    }
-
-    /**
-     * @param $bool
-     */
-    public function setAuthenticated($bool)
-    {
-        if (is_bool($bool))
-        {
-            $_SESSION['auth'] = $bool;
-        }
-    }
-
     /**
      * @return mixed
      */
@@ -48,6 +27,14 @@ class User
     }
 
     /**
+     * @return bool
+     */
+    public function isAuthenticated()
+    {
+        return isset($_SESSION['auth']) && $_SESSION['auth'] === true;
+    }
+
+    /**
      * @param $string
      */
     public function setAlert($string)
@@ -55,4 +42,14 @@ class User
             $_SESSION['alert'] = $string;
     }
 
+    /**
+     * @param $bool
+     */
+    public function setAuthenticated($bool)
+    {
+        if (is_bool($bool))
+        {
+            $_SESSION['auth'] = $bool;
+        }
+    }
 }

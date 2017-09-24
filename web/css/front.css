@@ -122,7 +122,7 @@ footer .backToTop {
 
 /* ===== INDEX ===== */
 
-/* --- Chapters --- */
+/* --- front --- */
 .chapters {
     border-bottom: solid #D8D8D8 1px;
     background-color: #FFFFFF;
@@ -209,24 +209,34 @@ footer .backToTop {
     border-top: dashed #8C919B 1px;
     margin-bottom: 30px;
 }
-.commentInfo {
+.commentInfo, .commentAdmin {
     margin-top: 10px;
     padding-bottom: 20px;
     background-color: #F7F7F7;
     border-radius: 10px;
 }
-.comment .author {
+.commentAdmin {
+    background-color: #c0deed;
+}
+.comment .commentAdmin .admin {
+    margin-top: 5px;
+}
+.comment .author, .comment .admin  {
     color: #37B5F2;
-    font-weight: bold;
+    font-size: large;
     margin-top: -5px;
     margin-bottom: 0px;
 }
 .comment .date {
     margin-bottom: 0px;
 }
-.comment .content {
+.comment .content, .comment .adminContent {
     font-size: 15px;
     color: #464646;
+}
+.comment .offense {
+    font-size: 15px;
+    color: #A94442;
 }
 .comment .flag {
     text-align: right;
@@ -248,6 +258,9 @@ footer .backToTop {
 .comment .danger {
     text-align: right;
     margin: 15px 15px 0px 0px;
+}
+.trash {
+    margin-left: 10px;
 }
 
 /* ===== INSERT COMMENT ===== */
@@ -295,7 +308,7 @@ footer .backToTop {
     .chapters h2, .chapterOnly h2 {
         font-size: 20px;
     }
-    .chapters p, .chapterOnly p, .comment a {
+    .chapters p, .chapterOnly p, .comment a, .comment .content, .comment .adminContent {
         font-size: 15px;
     }
     .container .chapters img {

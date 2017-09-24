@@ -24,7 +24,7 @@
       <header class="row">
         <div class="text-center col-md-3 col-md-offset-1"><h2>Billet simple pour</h2></div>
         <div class="col-md-4 text-center"><h1>l'Alaska</h1></div>
-        <div class="col-md-3 text-center"><p>par Jean Forteroche</p></div>
+        <div class="col-md-3 text-center"><p>by Jean Forteroche</p></div>
         <? if(isset($carousel)) echo $carousel ?>
       </header>
 
@@ -44,11 +44,11 @@
             </div>
             <div class="collapse navbar-collapse">
               <ul class="nav navbar-nav">
-                <li><a class="accueil" href="/">Accueil</a></li>
-                  <li class="dropdown"><a data-toggle="dropdown" href="">Chapitres<b class="caret"></b></a>
+                <li><a class="accueil" href="/">Home</a></li>
+                  <li class="dropdown"><a data-toggle="dropdown" href="">Chapters<b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu">
-                        <? foreach ($chapters as $chapter) { ?>
-                            <li><a href='?controller=front&amp;action=show&amp;id=<? echo $chapter->getId() ?>' aria-label="book"><i class="fa fa-book" aria-hidden="true"></i>&nbsp;Chapitre <? echo $chapter->getNumber() ?></a></li>
+                        <? foreach ($chaptersList as $chapter) { ?>
+                            <li><a href='?controller=front&amp;action=show&amp;id=<? echo $chapter->getId() ?>' aria-label="book"><i class="fa fa-book" aria-hidden="true"></i>&nbsp;Chapter <? echo $chapter->getNumber() ?></a></li>
                         <? } ?>
                     </ul>
                   </li>

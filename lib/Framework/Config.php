@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Framework;
-
 
 /**
  * Class Config
@@ -25,7 +23,7 @@ class Config
         // Load admin.json file in $_credentials if it not already loaded. It contains login and password
         if (empty($this->_credentials))
         {
-            $config = json_decode(file_get_contents('../app/config/admin.json'));
+            $config = json_decode(file_get_contents('../App/config/admin.json'));
             foreach ($config as $key => $value)
             {
                 $this->_credentials[$key] = $value;
