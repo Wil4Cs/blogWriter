@@ -19,6 +19,14 @@ class ChapterDAO extends DAO
         return $count;
     }
 
+    public function deleteChapter($id)
+    {
+        $req = $this->_db->prepare('DELETE FROM chapters WHERE id = :id');
+        $req->bindValue('id', $id, \PDO::PARAM_INT);
+        $req->execute();
+        $req->closeCursor();
+    }
+
     public function find($id)
     {
         $req = $this->_db->prepare('SELECT * FROM chapters WHERE id = :id');

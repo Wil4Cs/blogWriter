@@ -298,6 +298,9 @@ footer .backToTop {
     }
 }
 @media (min-width: 768px) {
+    .chapters {
+        min-height: 445px;
+    }
     .img-circle {
         width: 230px;
         height: 230px;
@@ -324,6 +327,9 @@ footer .backToTop {
 @media (min-width: 992px) {
     header p {
         padding-top: 90px;
+    }
+    .chapters {
+        min-height: 495px;
     }
     .img-circle {
         width: 250px;

@@ -52,7 +52,7 @@ class Application
         // Load all roads
         $roads = array(
             'front' => ['index', 'show', 'error', 'comment'],
-            'back'  => ['index', 'disconnect', 'refreshComment','eraseComment', 'moderateComment', 'deleteComment']
+            'back'  => ['index', 'show', 'disconnect', 'deleteChapter', 'editComment', 'eraseComment', 'moderateComment', 'refreshComment']
         );
         return $roads;
     }

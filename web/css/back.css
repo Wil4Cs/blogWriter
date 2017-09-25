@@ -111,9 +111,10 @@ header p {
     border-radius: 0 0 5px 0;
 }
 /* Welcome - Log-out */
-.page-content h3 {
+.page-content h2 {
     color: #666666;
     font-weight: bold;
+    font-size: 1.5em;
 }
 .page-content .log-out {
     margin-top: 20px;
@@ -147,6 +148,13 @@ header p {
 .link-buttons button a:hover {
     color: #F7F7F7;
     text-decoration: none;
+}
+/* Panel */
+.panel-body h3 {
+    font-size: 1.1em;
+}
+.panel-body p {
+    font-size: 0.9em;
 }
 
 

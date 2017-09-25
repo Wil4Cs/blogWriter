@@ -35,8 +35,8 @@
                                 <p class="offense col-xs-12">Offensive content reported to administrator</p>
                             <? } } if ($user->isAuthenticated()) { ?>
                                 <div class="col-xs-offset-9 col-xs-3 col-md-offset-10 col-md-2">
-                                    <a href="?controller=back&amp;action=&amp;id="><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                    <a class="trash" href="?controller=back&amp;action=eraseComment&amp;id="><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                    <a href="?controller=back&amp;action=editComment&amp;id=<? echo $comment->getId() ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                    <a class="trash" href="?controller=back&amp;action=eraseComment&amp;id=<? echo $comment->getId() ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                 </div>
                             <? } ?>
                             </div>

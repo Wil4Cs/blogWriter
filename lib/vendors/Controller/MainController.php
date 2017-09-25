@@ -6,6 +6,7 @@ use App\Application;
 use Framework\ApplicationComponent;
 use Framework\Page;
 use DAO\ChapterDAO;
+use DAO\CommentDAO;
 
 /**
  * Class MainController
@@ -31,8 +32,6 @@ abstract class MainController extends ApplicationComponent
 
     abstract public function index();
 
-    abstract public function comment();
-
     abstract public function show();
 
     protected function chapterExists($nameColumn, $number)
@@ -42,6 +41,17 @@ abstract class MainController extends ApplicationComponent
         if (isset($number) && ctype_digit($number) && $chapterDAO->ifChapterExists(array($nameColumn, $number)))
         {
             return $chapterDAO;
+        } else {
+            return $this->error();
+        }
+    }
+
+    protected function commentExists($id)
+    {
+        $commentDAO = new CommentDAO($id);
+        if (ctype_digit($id) && $commentDAO->ifCommentExists($id))
+        {
+            return $commentDAO;
         } else {
             return $this->error();
         }

@@ -13,15 +13,12 @@ use Framework\Config;
  */
 class BackController extends MainController
 {
-    public function comment()
+    public function deleteChapter()
     {
-        // TODO: Implement comment() method.
-    }
-
-    public function moderateComment()
-    {
-        $this->allCautionComments();
-        $this->sendPage();
+        $this->chapterExists('id', $_GET['id']);
+        $chapterDAO = new ChapterDAO();
+        $chapterDAO->deleteChapter($_GET['id']);
+        header('Location: ?controller=back&action=show');
     }
 
     public function disconnect()
@@ -30,12 +27,29 @@ class BackController extends MainController
         header('Location: .');
     }
 
+    public function editComment()
+    {
+        $commentDAO = new CommentDAO();
+        $commentDAO->ifCommentExists($_GET['id']);
+        $comment = $commentDAO->getComment($_GET['id']);
+        $this->page->setViewsVars('comment', $comment);
+        $this->sendPage();
+    }
+
     public function eraseComment()
     {
         $id = $_GET['id'];
         $commentDAO= $this->commentExists($id);
-        $commentDAO->eraseComment($id);
-        header('Location: ?controller=' .$_GET['controller']. '&action=moderateComment');
+        // Check if we erase the comment from front or back section to return the correct header
+        if (!empty($_SERVER['HTTP_REFERER']) && preg_match("#front#", $_SERVER['HTTP_REFERER'])) {
+            //$chapterId = $commentDAO->findChapterOfComment($id);
+            $commentDAO->eraseComment($id);
+            //header('Location: ?controller=front&action=show&id=' .$chapterId);
+            header('Location: ' .$_SERVER['HTTP_REFERER']);
+        } else {
+            $commentDAO->eraseComment($id);
+            header('Location: ?controller=back&action=moderateComment');
+        }
     }
 
     public function error()
@@ -66,17 +80,25 @@ class BackController extends MainController
         }
     }
 
-    public function show()
+    public function moderateComment()
     {
-        // TODO: Implement show() method.
+        $this->allCautionComments();
+        $this->sendPage();
     }
 
     public function refreshComment()
     {
         $id = $_GET['id'];
         $commentDAO = $this->commentExists($id);
-        $commentDAO->refreshComment($id);
-        header('Location: ?controller=' .$_GET['controller']. '&action=moderateComment');
+        // Value 0 means the comment is not warned => flag = FALSE
+        $commentDAO->flagComment($id, '0');
+        header('Location: ?controller=back&action=moderateComment');
+    }
+
+    public function show()
+    {
+        $this->wrapChaptersContent('300');
+        $this->sendPage();
     }
 
     private function allCautionComments()
@@ -94,17 +116,6 @@ class BackController extends MainController
         if ($login == $config->get('login') && $password == $config->get('password'))
         {
             return true;
-        }
-    }
-
-    private function commentExists($id)
-    {
-        $commentDAO = new CommentDAO($id);
-        if (ctype_digit($id) && $commentDAO->ifCommentExists($id))
-        {
-            return $commentDAO;
-        } else {
-            return $this->error();
         }
     }
 
@@ -131,7 +142,7 @@ class BackController extends MainController
         if ($credentials === true)
         {
             $user->setAuthenticated(true);
-            header('Location: ?controller=' . $_GET['controller'] . '&action=' . $_GET['action']);
+            header('Location: ?controller=back&action=index');
 
         } else {
             $user->setAlert('Le login ou le mot de passe est incorrect');

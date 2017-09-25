@@ -13,20 +13,19 @@ class CommentDAO extends DAO
 {
     public function addComment(Comment $comment)
     {
-        $result = $this->_db->prepare('INSERT INTO comments SET author = :author, content = :content, chapter = :chapter, postDate = NOW()' );
-        $result->bindValue('author', $comment->getAuthor());
-        $result->bindValue('content', $comment->getContent());
-        $result->bindValue('chapter', $comment->getChapter(), \PDO::PARAM_INT);
-        $result->execute();
-        $result->closeCursor();
+        $req = $this->_db->prepare('INSERT INTO comments SET author = :author, content = :content, chapter = :chapter, postDate = NOW()' );
+        $req->bindValue('author', $comment->getAuthor());
+        $req->bindValue('content', $comment->getContent());
+        $req->bindValue('chapter', $comment->getChapter(), \PDO::PARAM_INT);
+        $req->execute();
+        $req->closeCursor();
     }
 
-    public function cautionComment($id)
+    public function flagComment($id, $value)
     {
         $req = $this->_db->prepare('UPDATE comments SET flag = :flag WHERE id = :id');
-        // Value 1 means the comment is now warned => flag = TRUE
         $req->bindValue('id', $id, \PDO::PARAM_INT);
-        $req->bindValue('flag', '1', \PDO::PARAM_BOOL);
+        $req->bindValue('flag', $value, \PDO::PARAM_BOOL);
         $req->execute();
         $req->closeCursor();
     }
@@ -74,6 +73,17 @@ class CommentDAO extends DAO
         return $cautionCommentsList;
     }
 
+    public function getComment($id)
+    {
+        $req = $this->_db->prepare('SELECT * FROM comments WHERE id = :id');
+        $req->bindValue('id', $id, \PDO::PARAM_INT);
+        $req->execute();
+        $result = $req->fetch();
+        $comment = new Comment($result);
+        $req->closeCursor();
+        return $comment;
+    }
+
     public function getListOfComments($chapter)
     {
         $req = $this->_db->prepare('SELECT * FROM comments WHERE chapter = :chapter ORDER BY id DESC');
@@ -88,11 +98,13 @@ class CommentDAO extends DAO
         return $commentList;
     }
 
-    public function refreshComment($id)
+    public function updateComment(Comment $comment)
     {
-        $req = $this->_db->prepare('UPDATE comments SET flag = :flag WHERE id = :id');
-        $req->bindValue('id', $id, \PDO::PARAM_INT);
-        $req->bindValue('flag', '0', \PDO::PARAM_BOOL);
+        $req = $this->_db->prepare('UPDATE comments SET author = :author, content = :content, chapter = :chapter, postDate = NOW() WHERE id = :id');
+        $req->bindValue('author', $comment->getAuthor());
+        $req->bindValue('chapter', $comment->getChapter(), \PDO::PARAM_INT);
+        $req->bindValue('content', $comment->getContent());
+        $req->bindValue('id', $comment->getId(), \PDO::PARAM_INT);
         $req->execute();
         $req->closeCursor();
     }

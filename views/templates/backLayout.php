@@ -62,14 +62,13 @@
         ================================================== -->
         <section class="col-xs-12 col-sm-10 page-content">
             <div class="col-xs-12">
-                <h3 class="col-xs-8">Welcome Admin</h3>
+                <h2 class="col-xs-8">Welcome Admin</h2>
                 <a class="log-out col-xs-4 log" href="?controller=back&amp;action=disconnect">Log-out&nbsp;<i class="fa fa-lg fa-sign-out" aria-hidden="true"></i></a>
                 <p class="col-xs-12">What would you like to do?</p>
             </div>
             <div class="link-buttons col-xs-12">
                 <div class="col-xs-3 col-sm-3 col-sm-offset-0 col-md-2"><button><a href=""><i class="col-xs-12 fa fa-2x fa-pencil" aria-hidden="true"></i>Add Chapter</a></button></div>
-                <div class="col-xs-3 col-sm-3 col-sm-offset-0 col-md-2"><button><a href=""><i class="col-xs-12 fa fa-2x fa-pencil" aria-hidden="true"></i>Edit Chapter</a></button></div>
-                <div class="col-xs-3 col-sm-3 col-sm-offset-0 col-md-2"><button><a href="?controller=front&amp;action="><i class="col-xs-12 fa fa-2x fa-comments-o" aria-hidden="true"></i>Delete Comment</a></button></div>
+                <div class="col-xs-3 col-sm-3 col-sm-offset-0 col-md-2"><button><a href="?controller=back&amp;action=show"><i class="col-xs-12 fa fa-2x fa-pencil" aria-hidden="true"></i>All Chapters</a></button></div>
                 <div class="col-xs-3 col-sm-3 col-sm-offset-0 col-md-2"><button><a href="?controller=back&amp;action=moderateComment"><i class="col-xs-12 fa fa-2x fa-comments-o" aria-hidden="true"></i>Moderate Comment</a></button></div>
             </div>
             <? echo $content ?>
