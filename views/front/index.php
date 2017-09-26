@@ -1,7 +1,7 @@
 <? foreach($chapters as $chapter) { ?>
 <div class="container ">
     <section class="chapters row">
-        <img class="hidden-xs img-circle" src="img/alaska5.jpg" alt="Humpback whales">
+        <img class="hidden-xs img-circle" src="img/<? echo $chapter->getImageName() ?>" alt="Humpback whales">
         <article class="col-xs-12 col-sm-8">
             <h1>Chapter <? echo $chapter->getChapterNumber() ?> : </h1>
             <div class="horizontal_bar"></div>

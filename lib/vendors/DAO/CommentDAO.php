@@ -13,10 +13,10 @@ class CommentDAO extends DAO
 {
     public function addComment(Comment $comment)
     {
-        $req = $this->_db->prepare('INSERT INTO comments SET author = :author, content = :content, chapter = :chapter, postDate = NOW()' );
+        $req = $this->_db->prepare('INSERT INTO comments SET author = :author, content = :content, chapter_number = :chapterNumber, post_date = NOW()' );
         $req->bindValue('author', $comment->getAuthor());
         $req->bindValue('content', $comment->getContent());
-        $req->bindValue('chapter', $comment->getChapter(), \PDO::PARAM_INT);
+        $req->bindValue('chapterNumber', $comment->getChapterNumber(), \PDO::PARAM_INT);
         $req->execute();
         $req->closeCursor();
     }
@@ -60,6 +60,14 @@ class CommentDAO extends DAO
         $req->closeCursor();
     }
 
+    public function eraseAllComments($chapterNumber)
+    {
+        $req = $this->_db->prepare('DELETE FROM comments WHERE chapter_number = :chapterNumber');
+        $req->bindValue('chapterNumber', $chapterNumber, \PDO::PARAM_INT);
+        $req->execute();
+        $req->closeCursor();
+    }
+
     public function getAllCautionComments()
     {
         $req = $this->_db->query('SELECT * FROM comments WHERE flag = 1');
@@ -86,8 +94,8 @@ class CommentDAO extends DAO
 
     public function getListOfComments($chapter)
     {
-        $req = $this->_db->prepare('SELECT * FROM comments WHERE chapter = :chapter ORDER BY id DESC');
-        $req->bindValue('chapter', $chapter, \PDO::PARAM_INT);
+        $req = $this->_db->prepare('SELECT * FROM comments WHERE chapter_number = :chapterNumber ORDER BY id DESC');
+        $req->bindValue('chapterNumber', $chapter, \PDO::PARAM_INT);
         $req->execute();
         $commentList = array();
         foreach ($req as $dbRow)
@@ -100,9 +108,9 @@ class CommentDAO extends DAO
 
     public function updateComment(Comment $comment)
     {
-        $req = $this->_db->prepare('UPDATE comments SET author = :author, content = :content, chapter = :chapter, postDate = NOW() WHERE id = :id');
+        $req = $this->_db->prepare('UPDATE comments SET author = :author, content = :content, chapter_number = :chapterNumber, post_date = NOW() WHERE id = :id');
         $req->bindValue('author', $comment->getAuthor());
-        $req->bindValue('chapter', $comment->getChapter(), \PDO::PARAM_INT);
+        $req->bindValue('chapterNumber', $comment->getChapterNumber(), \PDO::PARAM_INT);
         $req->bindValue('content', $comment->getContent());
         $req->bindValue('id', $comment->getId(), \PDO::PARAM_INT);
         $req->execute();

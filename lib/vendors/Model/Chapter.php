@@ -15,6 +15,7 @@ class Chapter
     private $_date;
     private $_id;
     private $_chapterNumber;
+    private $_imageName;
     private $_title;
 
     /**
@@ -28,7 +29,9 @@ class Chapter
 
             foreach ($data as $key => $value)
             {
-                $method = 'set'.ucfirst($key);
+                $camelCase = ucwords(str_replace('_', ' ', $key));
+
+                $method = 'set' .str_replace(' ', '', $camelCase);
 
                 if (is_callable([$this, $method]))
                 {
@@ -39,12 +42,20 @@ class Chapter
     }
 
     // GETTERS //
+
     /**
      * @return mixed
      */
     public function getAuthor()
     {
         return $this->_author;
+    }
+    /**
+     * @return mixed
+     */
+    public function getChapterNumber()
+    {
+        return $this->_chapterNumber;
     }
 
     /**
@@ -74,9 +85,9 @@ class Chapter
     /**
      * @return mixed
      */
-    public function getChapterNumber()
+    public function getImageName()
     {
-        return $this->_chapterNumber;
+        return $this->_imageName;
     }
 
     /**
@@ -136,6 +147,13 @@ class Chapter
         $this->_chapterNumber = $number;
     }
 
+    /**
+     * @param mixed $imageName
+     */
+    public function setImageName($imageName)
+    {
+        $this->_imageName = $imageName;
+    }
 
     /**
      * @param $date

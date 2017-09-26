@@ -34,11 +34,11 @@ abstract class MainController extends ApplicationComponent
 
     abstract public function show();
 
-    protected function chapterExists($nameColumn, $number)
+    protected function chapterExists($dbColumnName, $value)
     {
         $chapterDAO = new ChapterDAO();
-        // Check whether the $number is set, is an integer and if the $number exists in db nameColumn
-        if (isset($number) && ctype_digit($number) && $chapterDAO->ifChapterExists(array($nameColumn, $number)))
+        // Check whether the $value is set, is an integer and if the $value exists in db nameColumn
+        if (isset($value) && ctype_digit($value) && $chapterDAO->ifChapterExists(array($dbColumnName, $value)))
         {
             return true;
         } else {
@@ -75,6 +75,7 @@ abstract class MainController extends ApplicationComponent
 
     protected function wrapChaptersContent($maxLengthContent)
     {
+        // Wrap chapter's content. $maxLengthContent must be an integer.
         if (!ctype_digit($maxLengthContent))
         {
             throw new \RuntimeException('Specified numbers of characters must be an integer');

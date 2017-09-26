@@ -11,7 +11,7 @@ namespace Model;
 class Comment
 {
     private $_author;
-    private $_chapter;
+    private $_chapterNumber;
     private $_content;
     private $_date;
     private $_flag;
@@ -28,7 +28,9 @@ class Comment
 
             foreach ($data as $key => $value)
             {
-                $method = 'set'.ucfirst($key);
+                $camelCase = ucwords(str_replace('_', ' ', $key));
+
+                $method = 'set' .str_replace(' ', '', $camelCase);
 
                 if (is_callable([$this, $method]))
                 {
@@ -50,9 +52,9 @@ class Comment
     /**
      * @return mixed
      */
-    public function getChapter()
+    public function getChapterNumber()
     {
-        return $this->_chapter;
+        return $this->_chapterNumber;
     }
 
     /**
@@ -104,9 +106,9 @@ class Comment
     /**
      * @param $chapter
      */
-    public function setChapter($chapter)
+    public function setChapterNumber($chapter)
     {
-        $this->_chapter = (int)$chapter;
+        $this->_chapterNumber = (int)$chapter;
     }
 
     /**

@@ -44,7 +44,7 @@
             </div>
             <div class="collapse navbar-collapse">
               <ul class="nav navbar-nav">
-                <li><a class="accueil" href="/">Home</a></li>
+                <li><a class="accueil" href="./">Home</a></li>
                   <li class="dropdown"><a data-toggle="dropdown" href="">Chapters<b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu">
                         <? foreach ($chaptersList as $chapter) { ?>

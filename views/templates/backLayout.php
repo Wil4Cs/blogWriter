@@ -72,7 +72,7 @@
                     </div>
                     <div class="link-buttons col-xs-12">
                         <div class="col-xs-3 col-sm-3 col-sm-offset-0 col-md-2"><button><a href="?controller=back&amp;action=addChapter"><i class="col-xs-12 fa fa-2x fa-pencil" aria-hidden="true"></i>Add Chapter</a></button></div>
-                        <div class="col-xs-3 col-sm-3 col-sm-offset-0 col-md-2"><button><a href="?controller=back&amp;action=show"><i class="col-xs-12 fa fa-2x fa-pencil" aria-hidden="true"></i>All Chapters</a></button></div>
+                        <div class="col-xs-3 col-sm-3 col-sm-offset-0 col-md-2"><button><a href="?controller=back&amp;action=show"><i class="col-xs-12 fa fa-2x fa-pencil" aria-hidden="true"></i>Edit Chapters</a></button></div>
                         <div class="col-xs-3 col-sm-3 col-sm-offset-0 col-md-2"><button><a href="?controller=back&amp;action=moderateComment"><i class="col-xs-12 fa fa-2x fa-comments-o" aria-hidden="true"></i>Moderate Comment</a></button></div>
                     </div>
                     <? echo $content ?>
@@ -89,10 +89,21 @@
         <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 
         <script>
-            $(document).ready(function() {
-                $('#summernote').summernote({
-                    minHeight: 400
-                });
+            $('#summernote').summernote({
+                toolbar: [
+                    // [groupName, [list of button]]
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontsyle', ['fontname']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['undo', ['undo', 'redo']],
+                    ['misc', ['link', 'hr']],
+                    ['fullscreen', ['fullscreen']]
+                ],
+                minHeight : 400,
+                placeholder: 'Your text here...'
             });
         </script>
 

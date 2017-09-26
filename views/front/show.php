@@ -1,6 +1,6 @@
 <div class="container">
     <section class="row chapterOnly">
-        <img class="hidden-xs col-sm-12" src="img/alaska5.jpg" alt="Humpback whales">
+        <img class="hidden-xs col-sm-12" src="img/<? echo $chapter->getImageName() ?>" alt="Humpback whales">
         <div class="row">
             <h1 class="col-xs-5">Chapter <? echo $chapter->getChapterNumber() ?></h1>
             <article class="col-xs-offset-1 col-xs-10">

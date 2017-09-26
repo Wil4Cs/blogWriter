@@ -109,6 +109,7 @@ header p {
 .page-content {
     background-color: #FBFBFB;
     border-radius: 0 0 5px 0;
+    padding-bottom: 20px;
 }
 /* Welcome - Log-out */
 .page-content h2 {

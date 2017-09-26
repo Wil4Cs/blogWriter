@@ -10,34 +10,41 @@ namespace Framework;
 class Page extends ApplicationComponent
 {
     private $_viewsVars = [];
-    private $_redirectVars = [];
+    private $_redirectViewVars = [];
 
     public function getWholePage()
     {
         $user = $this->getApp()->getUser();
 
-        // Include carousel for the main page only
-        if ($GLOBALS['controller'] == 'front' && $GLOBALS['action'] == 'index') {
-            ob_start();
-            require_once('../views/front/carousel.php');
-            $carousel = ob_get_clean();
-        }
-        if (!empty($this->_viewsVars)) {
+        // Extract views vars to use it
+        if (!empty($this->_viewsVars))
+        {
             extract($this->_viewsVars);
         }
 
-        $content = $this->getViewContent();
+        ob_start();
+        // Check if we need to redirect to another page
+        if (!empty($this->_redirectViewVars)) {
+            // Load view manually
+            require_once('../views/' . $this->_redirectViewVars['controller'] . '/' . $this->_redirectViewVars['action'] . '.php');
+        } else {
+            // Load view automatically
+            require_once('../views/' . $GLOBALS['controller'] . '/' . $GLOBALS['action'] . '.php');
+        }
+        $content = ob_get_clean();
+
+        // Get the Layout
         require_once('../views/templates/' .$GLOBALS['controller']. 'Layout.php');
     }
 
-    public function setRedirectVars($controller, $action)
+    public function setRedirectViewVars($controller, $action)
     {
         if (!is_string($controller) && !is_string($action) || empty($controller) && empty($action))
         {
             throw new \RuntimeException('Specified variables must be set and be a string');
         }
-        $this->_redirectVars['controller'] = $controller;
-        $this->_redirectVars['action'] = $action;
+        $this->_redirectViewVars['controller'] = $controller;
+        $this->_redirectViewVars['action'] = $action;
     }
 
     public function setViewsVars($var, $value)
@@ -49,20 +56,10 @@ class Page extends ApplicationComponent
         $this->_viewsVars[$var] = $value;
     }
 
-    private function getViewContent()
+    public function getAdditionalContent($view)
     {
-        $user = $this->getApp()->getUser();
-        if (!empty($this->_viewsVars)) {
-            extract($this->_viewsVars);
-        }
         ob_start();
-        if (!empty($this->_redirectVars)) {
-            // Load view manually
-            require_once('../views/' . $this->_redirectVars['controller'] . '/' . $this->_redirectVars['action'] . '.php');
-        } else {
-            // Load view automatically
-            require_once('../views/' . $GLOBALS['controller'] . '/' . $GLOBALS['action'] . '.php');
-        }
+        require_once($view);
         return ob_get_clean();
     }
 }

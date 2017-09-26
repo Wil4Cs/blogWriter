@@ -22,7 +22,8 @@ class BackController extends MainController
         }
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            if ($this->chapterExists('chapterNumber', $_POST['chapterNumber']) == true) {
+            // Check if the chapter's number is already use. Send an alert if yes.
+            if ($this->chapterExists('chapter_number', $_POST['chapterNumber'])) {
                 $user = $this->getApp()->getUser();
                 $user->setAlert('This chapter\'s number is already use. Please enter a new one !');
                 header('Location: ?controller=back&action=addChapter');
@@ -45,8 +46,12 @@ class BackController extends MainController
     {
         if ($this->chapterExists('id', $_GET['id']) == true)
         {
+            // Delete the chapter
             $chapterDAO = new ChapterDAO();
             $chapterDAO->deleteChapter($_GET['id']);
+            // Delete all comments of this chapter
+            $commentDAO = new CommentDAO();
+            $commentDAO->eraseAllComments($_GET['id']);
             header('Location: ?controller=back&action=show');
         } else {
             $this->error();
@@ -59,10 +64,51 @@ class BackController extends MainController
         header('Location: .');
     }
 
+    public function editChapter()
+    {
+            if ($_SERVER['REQUEST_METHOD'] == 'GET')
+            {
+                if ($this->chapterExists('id', $_GET['id']))
+                {
+                    $chapterDAO = new ChapterDAO();
+                    $chapter = $chapterDAO->find($_GET['id']);
+                    $this->page->setViewsVars('chapter', $chapter);
+                    $this->sendPage();
+                } else {
+                    $this->error();
+                }
+            }
+
+            if ($_SERVER['REQUEST_METHOD'] == 'POST')
+            {
+                // Find the chapter's number from the post id
+                $chapterDAO = new ChapterDAO();
+                $chapterNumber = $chapterDAO->findChapterNumber($_POST['id']);
+
+                // Check if the chapter's number has been modified or UPDATE the chapter
+                if ( $chapterNumber != $_POST['chapterNumber'])
+                {
+                    // Chapter's number has been modified so check if this number is not already use or UPDATE the chapter
+                    if ($this->chapterExists('chapter_number', $_POST['chapterNumber']))
+                    {
+                        $user = $this->getApp()->getUser();
+                        $user->setAlert('This chapter\'s number is already use. Please enter a new one !');
+                        header('Location: ?controller=back&action=editChapter&id=' . $_POST['id']);
+                    } else {
+                        $this->updateChapter($chapterDAO);
+                    }
+
+                } else {
+                    $this->updateChapter($chapterDAO);
+                }
+            }
+    }
+
     public function editComment()
     {
         $commentDAO = $this->commentExists($_GET['id']);
         $comment = $commentDAO->getComment($_GET['id']);
+        // Construct page to return
         $this->page->setViewsVars('comment', $comment);
         $this->sendPage();
     }
@@ -71,11 +117,9 @@ class BackController extends MainController
     {
         $id = $_GET['id'];
         $commentDAO= $this->commentExists($id);
-        // Check if we erase the comment from front or back section to return the correct header
+        // Check if we erase the comment from front or admin section to return the correct header
         if (!empty($_SERVER['HTTP_REFERER']) && preg_match("#front#", $_SERVER['HTTP_REFERER'])) {
-            //$chapterId = $commentDAO->findChapterOfComment($id);
             $commentDAO->eraseComment($id);
-            //header('Location: ?controller=front&action=show&id=' .$chapterId);
             header('Location: ' .$_SERVER['HTTP_REFERER']);
         } else {
             $commentDAO->eraseComment($id);
@@ -92,7 +136,7 @@ class BackController extends MainController
     public function index()
     {
         $user = $this->getApp()->getUser();
-        // Go to back page if he is already authenticated
+        // Go to admin page if he is already authenticated
         if ($user->isAuthenticated())
         {
             $this->numbersOfChapters();
@@ -102,7 +146,8 @@ class BackController extends MainController
         // Go to connexion page if the form is not send and user is not authenticated
         if (!isset($_POST['login']) && !$user->isAuthenticated())
         {
-            $this->page->setRedirectVars('back', 'connection');
+            // Construct page to return manually
+            $this->page->setRedirectViewVars('back', 'connection');
             $this->sendPage();
         }
         // If the form is send
@@ -113,7 +158,9 @@ class BackController extends MainController
 
     public function moderateComment()
     {
-        $this->allCautionComments();
+        $commentDAO = new CommentDAO();
+        $allCautionComments = $commentDAO->getAllCautionComments();
+        $this->page->setViewsVars('allCautionComments', $allCautionComments);
         $this->sendPage();
     }
 
@@ -132,18 +179,12 @@ class BackController extends MainController
         $this->sendPage();
     }
 
-    private function allCautionComments()
-    {
-        $commentDAO = new CommentDAO();
-        $allCautionComments = $commentDAO->getAllCautionComments();
-        $this->page->setViewsVars('allCautionComments', $allCautionComments);
-    }
-
     private function checkPostCredentials()
     {
         $login = $_POST['login'];
         $password = $_POST['password'];
         $config = new Config();
+        // Check if the login and the password are correct
         if ($login == $config->get('login') && $password == $config->get('password'))
         {
             return true;
@@ -164,20 +205,34 @@ class BackController extends MainController
         $this->page->setViewsVars('numbersOfChapters', $numbersOfChapters);
     }
 
+    private function updateChapter(ChapterDAO $chapterDAO)
+    {
+        $chapter = new Chapter([
+            'author'        => $_POST['chapterAuthor'],
+            'content'       => $_POST['chapterContent'],
+            'chapterNumber' => $_POST['chapterNumber'],
+            'id'            => $_POST['id'],
+            'title'         => $_POST['chapterTitle']
+        ]);
+        $chapterDAO->updateChapter($chapter);
+        header('Location: ?controller=front&action=show&id=' .$_POST['id']);
+    }
+
     private function validConnectionForm()
     {
         $credentials = $this->checkPostCredentials();
         $user = $this->getApp()->getUser();
 
-        // And if login and password are correct
+        // If login and password are correct
         if ($credentials === true)
         {
             $user->setAuthenticated(true);
             header('Location: ?controller=back&action=index');
 
         } else {
+            // Send an alert and construct page to return manually
             $user->setAlert('Your login or password is not correct!');
-            $this->page->setRedirectVars('back','connection');
+            $this->page->setRedirectViewVars('back','connection');
             $this->sendPage();
         }
     }

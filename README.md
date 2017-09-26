@@ -1,7 +1,12 @@
 # blogWriter
 
-Développer une application de blog simple en PHP et avec une base de données MySQL pour un écrivain.
+PHP Version 7.1.0 was used to build this app. It means short open tags are available. So make sure to enable its in your php.ini (short_open_tag = On ).
+Then restart your Apache server.
 
-À développer en PHP sans utiliser de framework pour vous familiariser avec les concepts de base de la programmation. Le code sera construit sur une architecture MVC.
+Afterward you have just to fill config files in App/config. Enter your database details and choose a login with a password to access admin page!
 
-Vous développerez autant que possible en orienté objet (au minimum, le modèle doit être construit sous forme d'objet).
+Enjoy !!!
+
+This app has been developed to validate my project 3 with Openclassrooms.
+
+Special thanks to my mentor, Alexis, for his support.

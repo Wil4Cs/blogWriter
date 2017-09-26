@@ -18,7 +18,7 @@
             <div class="form-group col-sm-12 col-md-offset-1 col-lg-offset-2">
                 <button type="submit" class="btn btn-primary">Ajouter</button>
                 <input type="hidden" name="id" value="<? echo $comment->getId() ?>">
-                <input type="hidden" name="chapter" value="<? echo $comment->getChapter() ?>">
+                <input type="hidden" name="chapter" value="<? echo $comment->getChapterNumber() ?>">
             </div>
         </form>
     </div>
