@@ -2,7 +2,7 @@
     <section class="row chapterOnly">
         <img class="hidden-xs col-sm-12" src="img/alaska5.jpg" alt="Humpback whales">
         <div class="row">
-            <h1 class="col-xs-5">Chapter <? echo $chapter->getNumber() ?></h1>
+            <h1 class="col-xs-5">Chapter <? echo $chapter->getChapterNumber() ?></h1>
             <article class="col-xs-offset-1 col-xs-10">
                 <h2 class="col-xs-12"><? echo $chapter->getTitle() ?></h2>
                 <p class="col-xs-12"><? echo $chapter->getContent() ?></p>

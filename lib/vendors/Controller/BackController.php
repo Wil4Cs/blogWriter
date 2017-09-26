@@ -5,6 +5,7 @@ namespace Controller;
 use DAO\ChapterDAO;
 use DAO\CommentDAO;
 use Framework\Config;
+use Model\Chapter;
 
 /**
  * Class BackController
@@ -13,12 +14,43 @@ use Framework\Config;
  */
 class BackController extends MainController
 {
+    public function addChapter()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET')
+        {
+            $this->sendPage();
+        }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
+            if ($this->chapterExists('chapterNumber', $_POST['chapterNumber']) == true) {
+                $user = $this->getApp()->getUser();
+                $user->setAlert('This chapter\'s number is already use. Please enter a new one !');
+                header('Location: ?controller=back&action=addChapter');
+            } else {
+                $chapterDAO = new ChapterDAO();
+                $chapter = new Chapter([
+                    'author'        => $_POST['chapterAuthor'],
+                    'content'       => $_POST['chapterContent'],
+                    'chapterNumber' => $_POST['chapterNumber'],
+                    'title'         => $_POST['chapterTitle']
+                ]);
+                // Add the chapter and return the last insert id in db.
+                $lastId = $chapterDAO->addChapter($chapter);
+                header('Location: ?controller=front&action=show&id=' .$lastId);
+            }
+        }
+    }
+
     public function deleteChapter()
     {
-        $this->chapterExists('id', $_GET['id']);
-        $chapterDAO = new ChapterDAO();
-        $chapterDAO->deleteChapter($_GET['id']);
-        header('Location: ?controller=back&action=show');
+        if ($this->chapterExists('id', $_GET['id']) == true)
+        {
+            $chapterDAO = new ChapterDAO();
+            $chapterDAO->deleteChapter($_GET['id']);
+            header('Location: ?controller=back&action=show');
+        } else {
+            $this->error();
+        }
     }
 
     public function disconnect()
@@ -29,8 +61,7 @@ class BackController extends MainController
 
     public function editComment()
     {
-        $commentDAO = new CommentDAO();
-        $commentDAO->ifCommentExists($_GET['id']);
+        $commentDAO = $this->commentExists($_GET['id']);
         $comment = $commentDAO->getComment($_GET['id']);
         $this->page->setViewsVars('comment', $comment);
         $this->sendPage();
@@ -145,7 +176,7 @@ class BackController extends MainController
             header('Location: ?controller=back&action=index');
 
         } else {
-            $user->setAlert('Le login ou le mot de passe est incorrect');
+            $user->setAlert('Your login or password is not correct!');
             $this->page->setRedirectVars('back','connection');
             $this->sendPage();
         }

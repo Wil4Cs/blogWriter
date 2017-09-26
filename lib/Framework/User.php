@@ -14,8 +14,10 @@ class User
      */
     public function getAlert()
     {
-        return $_SESSION['alert'];
+        $alert = $_SESSION['alert'];
         unset($_SESSION['alert']);
+
+        return $alert;
     }
 
     /**

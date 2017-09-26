@@ -37,12 +37,12 @@ abstract class MainController extends ApplicationComponent
     protected function chapterExists($nameColumn, $number)
     {
         $chapterDAO = new ChapterDAO();
-        // Check whether the identifier is set, is an integer number and if the chapter id exists
+        // Check whether the $number is set, is an integer and if the $number exists in db nameColumn
         if (isset($number) && ctype_digit($number) && $chapterDAO->ifChapterExists(array($nameColumn, $number)))
         {
-            return $chapterDAO;
+            return true;
         } else {
-            return $this->error();
+            return false;
         }
     }
 

@@ -2,6 +2,7 @@
 
 namespace Controller;
 
+use DAO\ChapterDAO;
 use DAO\CommentDAO;
 use Model\Comment;
 
@@ -31,7 +32,7 @@ class FrontController extends MainController
             $id = $_GET['id'];
         }
         // Check if the chapter exists OR we return the error page
-        if ($chapterDAO = $this->chapterExists('id', $id)) {
+        if ($this->chapterExists('id', $id) == true) {
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Request method is POST so we need to insert a comment
                 $this->postCommentForm();
@@ -42,17 +43,20 @@ class FrontController extends MainController
                 // Request method is GET so we need to post up the form
                 $this->getCommentForm();
             }
+        } else {
+            $this->error();
         }
     }
 
     public function show()
     {
-        // Check if the chapter exists. It constructs a Chapter object
-        if ($chapterDAO = $this->chapterExists('id', $_GET['id'])) {
+        // Check if the chapter exists.
+        if ($this->chapterExists('id', $_GET['id']) == true) {
             // Find the chapter to show
+            $chapterDAO = new ChapterDAO();
             $chapter = $chapterDAO->find($_GET['id']);
 
-            // Check if a comment has just been mention & constructs a Comment object
+            // Check if a comment has just been mention. The called method return a Comment object
             $commentDAO = $this->cautionComment();
 
             // Get all chapter's comments
@@ -62,6 +66,8 @@ class FrontController extends MainController
             $this->page->setViewsVars('chapter', $chapter);
             $this->page->setViewsVars('comments', $comments);
             $this->sendPage();
+        } else {
+            $this->error();
         }
     }
 

@@ -48,7 +48,7 @@
                   <li class="dropdown"><a data-toggle="dropdown" href="">Chapters<b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu">
                         <? foreach ($chaptersList as $chapter) { ?>
-                            <li><a href='?controller=front&amp;action=show&amp;id=<? echo $chapter->getId() ?>' aria-label="book"><i class="fa fa-book" aria-hidden="true"></i>&nbsp;Chapter <? echo $chapter->getNumber() ?></a></li>
+                            <li><a href='?controller=front&amp;action=show&amp;id=<? echo $chapter->getId() ?>' aria-label="book"><i class="fa fa-book" aria-hidden="true"></i>&nbsp;Chapter <? echo $chapter->getChapterNumber() ?></a></li>
                         <? } ?>
                     </ul>
                   </li>
@@ -91,6 +91,5 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
       <!-- Javascript de Bootstrap -->
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
   </body>
 </html>

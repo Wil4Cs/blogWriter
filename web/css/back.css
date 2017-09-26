@@ -149,6 +149,13 @@ header p {
     color: #F7F7F7;
     text-decoration: none;
 }
+/* Breadcrumbs */
+.breadcrumbs {
+    text-align: center;
+    font-style: oblique;
+    margin-bottom: 30px;
+    color: #62AC00;
+}
 /* Panel */
 .panel-body h3 {
     font-size: 1.1em;
@@ -156,7 +163,9 @@ header p {
 .panel-body p {
     font-size: 0.9em;
 }
-
+.cautionComment {
+    color: #A94442;
+}
 
 /* ===== CONNECTION ===== */
 

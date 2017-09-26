@@ -14,7 +14,7 @@ class Chapter
     private $_content;
     private $_date;
     private $_id;
-    private $_number;
+    private $_chapterNumber;
     private $_title;
 
     /**
@@ -74,9 +74,9 @@ class Chapter
     /**
      * @return mixed
      */
-    public function getNumber()
+    public function getChapterNumber()
     {
-        return $this->_number;
+        return $this->_chapterNumber;
     }
 
     /**
@@ -127,13 +127,13 @@ class Chapter
      * @param $number
      * @return null
      */
-    public function setNumber($number)
+    public function setChapterNumber($number)
     {
         if (empty($number) || !ctype_digit($number))
         {
             return null;
         }
-        $this->_number = $number;
+        $this->_chapterNumber = $number;
     }
 
 

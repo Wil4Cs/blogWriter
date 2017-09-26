@@ -5,9 +5,9 @@
     <div class="panel-body">
         <p>Currently, <? echo $numbersOfChapters ?> chapter(s) have been published!</p>
         <? if ($numbersOfCautionComments == '0') { ?>
-        <p>No comments has been warned!</p>
+        <p>No comments have been warned!</p>
         <? } else { ?>
-        <p><i class="fa fa-flag text-danger" aria-hidden="true"></i> <? echo $numbersOfCautionComments ?> comment(s) has been warned!</p>
+        <p class="cautionComment"><i class="fa fa-flag text-danger" aria-hidden="true"></i> <? echo $numbersOfCautionComments ?> comment(s) has been warned!</p>
         <? } ?>
     </div>
 </div>

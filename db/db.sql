@@ -13,7 +13,7 @@ USE `blogWriter`;
 DROP TABLE IF EXISTS `chapters`;
 CREATE TABLE IF NOT EXISTS `chapters` (
   `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `number` tinyint(3) UNSIGNED NOT NULL,
+  `chapterNumber` tinyint(3) UNSIGNED NOT NULL,
   `author` varchar(30) NOT NULL DEFAULT 'Jean Forteroche',
   `title` varchar(50) NOT NULL,
   `content` text NOT NULL,

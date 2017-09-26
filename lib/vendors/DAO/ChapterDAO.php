@@ -11,6 +11,18 @@ use Model\Chapter;
  */
 class ChapterDAO extends DAO
 {
+    public function addChapter(Chapter $chapter)
+    {
+        $req = $this->_db->prepare('INSERT INTO chapters SET author = :author, content = :content, title = :title, chapterNumber = :chapterNumber, postDate = NOW()' );
+        $req->bindValue('author', $chapter->getAuthor());
+        $req->bindValue('chapterNumber', $chapter->getChapterNumber(), \PDO::PARAM_INT);
+        $req->bindValue('content', $chapter->getContent());
+        $req->bindValue('title', $chapter->getTitle());
+        $req->execute();
+        $req->closeCursor();
+        return $lastId = $this->_db->lastInsertId();
+    }
+
     public function count()
     {
         $req = $this->_db->query('SELECT COUNT(id) FROM chapters');
@@ -39,7 +51,7 @@ class ChapterDAO extends DAO
 
     public function findAllChapters()
     {
-        $req = $this->_db->query('SELECT * FROM chapters ORDER BY number DESC');
+        $req = $this->_db->query('SELECT * FROM chapters ORDER BY chapterNumber DESC');
         $chaptersList = array();
         $result = $req->fetchAll();
         foreach ($result as $dbRow)
